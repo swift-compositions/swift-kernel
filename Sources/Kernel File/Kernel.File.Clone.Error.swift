@@ -1,4 +1,4 @@
-public import Error_Primitives
+public import Error
 
 extension Kernel.File.Clone {
 
@@ -16,7 +16,7 @@ extension Kernel.File.Clone {
 
         case isDirectory
 
-        case platform(code: Error_Primitives.Error.Code, operation: Operation)
+        case platform(code: Error.Error.Code, operation: Operation)
     }
 }
 

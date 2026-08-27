@@ -59,133 +59,133 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-primitives/swift-clock-primitives.git",
+            url: "https://github.com/swift-molecules/swift-clock.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-system-primitives.git",
+            url: "https://github.com/swift-molecules/swift-system.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-binary-primitives.git",
+            url: "https://github.com/swift-molecules/swift-binary.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-cardinal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-tagged-primitives.git",
+            url: "https://github.com/swift-molecules/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-time-primitives.git",
+            url: "https://github.com/swift-molecules/swift-time.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-ascii-primitives.git",
+            url: "https://github.com/swift-molecules/swift-ascii.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-dimension-primitives.git",
+            url: "https://github.com/swift-molecules/swift-dimension.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-queue-primitives.git",
+            url: "https://github.com/swift-molecules/swift-queue.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-reference-primitives.git",
+            url: "https://github.com/swift-molecules/swift-reference.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-ownership-primitives.git",
+            url: "https://github.com/swift-molecules/swift-ownership.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-error-primitives.git",
+            url: "https://github.com/swift-molecules/swift-error.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-random-primitives.git",
+            url: "https://github.com/swift-molecules/swift-random.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-path-primitives.git",
+            url: "https://github.com/swift-molecules/swift-path.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-string-primitives.git",
+            url: "https://github.com/swift-molecules/swift-string.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-primitives.git",
+            url: "https://github.com/swift-molecules/swift-memory.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-dictionary-primitives.git",
+            url: "https://github.com/swift-molecules/swift-dictionary.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-hash-table-primitives.git",
+            url: "https://github.com/swift-molecules/swift-hash-table.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-hash-primitives.git",
+            url: "https://github.com/swift-molecules/swift-hash.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-buffer-primitives.git",
+            url: "https://github.com/swift-molecules/swift-buffer.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-buffer-linear-primitives.git",
+            url: "https://github.com/swift-molecules/swift-buffer-linear.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-storage-primitives.git",
+            url: "https://github.com/swift-molecules/swift-storage.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-heap-primitives.git",
+            url: "https://github.com/swift-molecules/swift-memory-heap.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-memory-allocation-primitives.git",
+            url: "https://github.com/swift-molecules/swift-memory-allocation.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-primitives/swift-terminal-primitives.git",
+            url: "https://github.com/swift-molecules/swift-terminal.git",
             branch: "main"
         ),
-        .package(url: "https://github.com/swift-foundations/swift-cpu.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-posix.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-darwin.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-linux.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-windows.git", branch: "main"),
-        .package(url: "https://github.com/swift-foundations/swift-strings.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-cpu.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-posix.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-darwin.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-linux.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-windows.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-strings.git", branch: "main"),
     ],
     targets: [
 
         .target(
             name: "Kernel Core",
             dependencies: [
-                .product(name: "Binary Primitives", package: "swift-binary-primitives"),
+                .product(name: "Binary", package: "swift-binary"),
                 .product(name: "CPU", package: "swift-cpu"),
-                .product(name: "Cardinal Primitives", package: "swift-cardinal-primitives"),
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
-                .product(name: "Time Primitives", package: "swift-time-primitives"),
-                .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
-                .product(name: "Clock Primitives", package: "swift-clock-primitives"),
-                .product(name: "Error Primitives", package: "swift-error-primitives"),
-                .product(name: "Memory Primitives", package: "swift-memory-primitives"),
-                .product(name: "Random Primitives", package: "swift-random-primitives"),
-                .product(name: "System Primitives", package: "swift-system-primitives"),
-                .product(name: "Path Primitives", package: "swift-path-primitives"),
-                .product(name: "Reference Primitives", package: "swift-reference-primitives"),
-                .product(name: "Ownership Primitives", package: "swift-ownership-primitives"),
-                .product(name: "Dimension Primitives", package: "swift-dimension-primitives"),
-                .product(name: "Queue Primitives", package: "swift-queue-primitives"),
+                .product(name: "Cardinal", package: "swift-cardinal"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Time", package: "swift-time"),
+                .product(name: "ASCII", package: "swift-ascii"),
+                .product(name: "Clock", package: "swift-clock"),
+                .product(name: "Error", package: "swift-error"),
+                .product(name: "Memory", package: "swift-memory"),
+                .product(name: "Random", package: "swift-random"),
+                .product(name: "System", package: "swift-system"),
+                .product(name: "Path", package: "swift-path"),
+                .product(name: "Reference", package: "swift-reference"),
+                .product(name: "Ownership", package: "swift-ownership"),
+                .product(name: "Dimension", package: "swift-dimension"),
+                .product(name: "Queue", package: "swift-queue"),
                 .product(
                     name: "POSIX Kernel",
                     package: "swift-posix",
@@ -239,7 +239,7 @@ let package = Package(
             dependencies: [
                 "Kernel Core",
                 "Kernel System",
-                .product(name: "Error Primitives", package: "swift-error-primitives"),
+                .product(name: "Error", package: "swift-error"),
                 .product(
                     name: "Windows Kernel Thread",
                     package: "swift-windows",
@@ -252,10 +252,10 @@ let package = Package(
             name: "Kernel File",
             dependencies: [
                 "Kernel Core",
-                .product(name: "String Primitives", package: "swift-string-primitives"),
-                .product(name: "Error Primitives", package: "swift-error-primitives"),
-                .product(name: "Memory Primitives", package: "swift-memory-primitives"),
-                .product(name: "Path Primitives", package: "swift-path-primitives"),
+                .product(name: "String", package: "swift-string"),
+                .product(name: "Error", package: "swift-error"),
+                .product(name: "Memory", package: "swift-memory"),
+                .product(name: "Path", package: "swift-path"),
                 .product(
                     name: "Windows Kernel File",
                     package: "swift-windows",
@@ -268,28 +268,28 @@ let package = Package(
             name: "Kernel Event",
             dependencies: [
                 "Kernel Core",
-                .product(name: "Tagged Primitives", package: "swift-tagged-primitives"),
-                .product(name: "Dictionary Primitives", package: "swift-dictionary-primitives"),
-                .product(name: "Hash Indexed Primitive", package: "swift-hash-table-primitives"),
-                .product(name: "Hash Tagged Primitives", package: "swift-hash-primitives"),
-                .product(name: "Buffer Primitive", package: "swift-buffer-primitives"),
+                .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Dictionary", package: "swift-dictionary"),
+                .product(name: "Hash Indexed Primitive", package: "swift-hash-table"),
+                .product(name: "Hash Tagged", package: "swift-hash"),
+                .product(name: "Buffer Primitive", package: "swift-buffer"),
                 .product(
                     name: "Buffer Linear Primitive",
-                    package: "swift-buffer-linear-primitives"
+                    package: "swift-buffer-linear"
                 ),
                 .product(
-                    name: "Buffer Linear Primitives",
-                    package: "swift-buffer-linear-primitives"
+                    name: "Buffer Linear",
+                    package: "swift-buffer-linear"
                 ),
-                .product(name: "Storage Primitive", package: "swift-storage-primitives"),
+                .product(name: "Storage Primitive", package: "swift-storage"),
                 .product(
-                    name: "Storage Contiguous Primitives",
-                    package: "swift-storage-primitives"
+                    name: "Storage Contiguous",
+                    package: "swift-storage"
                 ),
-                .product(name: "Memory Heap Primitives", package: "swift-memory-heap-primitives"),
+                .product(name: "Memory Heap", package: "swift-memory-heap"),
                 .product(
                     name: "Memory Allocator Primitive",
-                    package: "swift-memory-allocation-primitives"
+                    package: "swift-memory-allocation"
                 ),
                 .product(
                     name: "POSIX Kernel Descriptor",
@@ -326,7 +326,7 @@ let package = Package(
         .target(
             name: "Kernel Clock",
             dependencies: [
-                .product(name: "Clock Primitives", package: "swift-clock-primitives"),
+                .product(name: "Clock", package: "swift-clock"),
                 .product(
                     name: "POSIX Kernel Clock",
                     package: "swift-posix",
@@ -344,7 +344,7 @@ let package = Package(
             name: "Kernel Terminal",
             dependencies: [
                 "Kernel Core",
-                .product(name: "Terminal Primitives", package: "swift-terminal-primitives"),
+                .product(name: "Terminal", package: "swift-terminal"),
                 .product(
                     name: "POSIX Kernel Terminal",
                     package: "swift-posix",
@@ -420,7 +420,7 @@ let package = Package(
             name: "_Lock Test Process",
             dependencies: [
                 "Kernel",
-                .product(name: "Binary Primitives", package: "swift-binary-primitives"),
+                .product(name: "Binary", package: "swift-binary"),
                 .product(
                     name: "POSIX Kernel Descriptor",
                     package: "swift-posix",
@@ -440,8 +440,8 @@ let package = Package(
                 "Kernel Completion",
                 "Kernel Test Support",
                 .product(
-                    name: "Tagged Primitives Standard Library Integration",
-                    package: "swift-tagged-primitives"
+                    name: "Tagged Standard Library Integration",
+                    package: "swift-tagged"
                 ),
             ],
             path: "Tests/Kernel Tests"

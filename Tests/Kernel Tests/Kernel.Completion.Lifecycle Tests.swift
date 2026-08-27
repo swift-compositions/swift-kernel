@@ -1,7 +1,7 @@
 #if KERNEL_AVAILABLE
 
     import Testing
-    import Tagged_Primitives_Standard_Library_Integration
+    import Tagged_Standard_Library_Integration
 
     @_spi(Syscall) @testable import Kernel_Completion
 
@@ -150,7 +150,7 @@
 
         @Test
         func `flush propagates platform error with exact code`() throws {
-            let code = Error_Primitives.Error.Code.posix(28)
+            let code = Error.Error.Code.posix(28)
             let error: Kernel.Completion.Error = .platform(code)
             let driver = Kernel.Completion.Driver(
                 submit: { _, _ in },

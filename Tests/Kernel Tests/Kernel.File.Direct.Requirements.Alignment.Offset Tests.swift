@@ -1,6 +1,6 @@
 import Kernel
 import Kernel_Test_Support
-import Tagged_Primitives_Standard_Library_Integration
+import Tagged_Standard_Library_Integration
 import Testing
 
 extension Kernel.File.Direct.Requirements.Alignment.Offset {

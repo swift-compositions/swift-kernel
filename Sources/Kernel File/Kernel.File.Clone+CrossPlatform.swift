@@ -1,4 +1,4 @@
-public import Path_Primitives
+public import Path
 
 #if os(macOS)
     internal import Darwin_Kernel_Standard

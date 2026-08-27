@@ -1,4 +1,4 @@
-public import Error_Primitives
+public import Error
 
 extension Kernel.File.Clone.Error {
 
@@ -12,7 +12,7 @@ extension Kernel.File.Clone.Error {
         }
     }
 
-    public init(code: Error_Primitives.Error.Code, operation: Operation) {
+    public init(code: Error.Error.Code, operation: Operation) {
         #if os(Windows)
             self = .platform(code: code, operation: operation)
         #else
@@ -33,7 +33,7 @@ extension Kernel.File.Clone.Error {
             case _ where code == .POSIX.EISDIR:
                 self = .isDirectory
 
-            case _ where Error_Primitives.Error.Code.POSIX.isENOTSUP(code):
+            case _ where Error.Error.Code.POSIX.isENOTSUP(code):
                 self = .notSupported
 
             default:

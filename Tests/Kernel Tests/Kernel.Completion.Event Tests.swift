@@ -1,4 +1,4 @@
-import Tagged_Primitives_Standard_Library_Integration
+import Tagged_Standard_Library_Integration
 import Testing
 
 @_spi(Syscall) @testable import Kernel_Completion

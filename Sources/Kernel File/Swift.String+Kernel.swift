@@ -1,5 +1,5 @@
-import Path_Primitives
-public import String_Primitives
+import Path
+public import String
 
 extension Swift.String {
 

@@ -1,5 +1,5 @@
-public import Memory_Primitives
-public import Path_Primitives
+public import Memory
+public import Path
 
 extension Kernel.File {
     public enum Direct {}

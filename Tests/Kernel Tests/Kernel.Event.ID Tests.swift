@@ -1,9 +1,9 @@
 #if !os(Windows)
 
-    @_spi(Syscall) import Error_Primitives
+    @_spi(Syscall) import Error
     import Kernel_Test_Support
-    @_spi(Syscall) import Path_Primitives
-    import Tagged_Primitives_Standard_Library_Integration
+    @_spi(Syscall) import Path
+    import Tagged_Standard_Library_Integration
     import Testing
 
     @testable @_spi(Syscall) import Kernel

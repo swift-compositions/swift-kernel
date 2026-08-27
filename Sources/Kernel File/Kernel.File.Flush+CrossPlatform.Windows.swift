@@ -1,6 +1,6 @@
 #if os(Windows)
 
-    public import Path_Primitives
+    public import Path
 
     extension Kernel.File.Flush {
 

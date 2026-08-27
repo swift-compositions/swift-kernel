@@ -1,13 +1,13 @@
 #if !os(Windows)
-    import Dictionary_Primitives
+    import Dictionary
     import Hash_Indexed_Primitive
-    import Hash_Tagged_Primitives
+    import Hash_Tagged
     import Buffer_Primitive
     import Buffer_Linear_Primitive
-    import Buffer_Linear_Primitives
+    import Buffer_Linear
     import Storage_Primitive
-    import Storage_Contiguous_Primitives
-    import Memory_Heap_Primitives
+    import Storage_Contiguous
+    import Memory_Heap
     import Memory_Allocator_Primitive
 
     extension Kernel.Event {
@@ -59,7 +59,7 @@
 
                 final class Shared {
 
-                    typealias Registry = Dictionary_Primitives.Dictionary<
+                    typealias Registry = Dictionary.Dictionary<
                         Kernel.Event.ID, Registration
                     >
                     var nextID = Kernel.Event.ID.zero

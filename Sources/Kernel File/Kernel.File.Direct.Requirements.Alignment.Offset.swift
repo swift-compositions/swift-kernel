@@ -1,4 +1,4 @@
-public import Memory_Primitives
+public import Memory
 
 extension Kernel.File.Direct.Requirements.Alignment {
 

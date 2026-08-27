@@ -1,5 +1,5 @@
 #if !os(Windows)
-    @_spi(Internal) import Tagged_Primitives
+    @_spi(Internal) import Tagged
     @_spi(Syscall) public import POSIX_Kernel_Descriptor
 
     extension Tagged where Tag == Kernel.Event, Underlying == UInt {

@@ -1,4 +1,4 @@
-public import Memory_Primitives
+public import Memory
 
 #if !os(Windows)
 

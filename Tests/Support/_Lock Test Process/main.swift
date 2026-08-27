@@ -1,4 +1,4 @@
-import Binary_Primitives
+import Binary
 import Kernel
 
 #if !os(Windows)

@@ -1,4 +1,4 @@
-public import Error_Primitives
+public import Error
 
 extension Kernel.Thread.Affinity {
 
@@ -10,7 +10,7 @@ extension Kernel.Thread.Affinity {
 
         case tooManyCPUs
 
-        case platform(Error_Primitives.Error.Code)
+        case platform(Error.Error.Code)
     }
 }
 

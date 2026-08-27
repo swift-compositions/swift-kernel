@@ -1,5 +1,5 @@
-public import Error_Primitives
-public import Memory_Primitives
+public import Error
+public import Memory
 
 extension Kernel.File.Direct {
 
@@ -17,7 +17,7 @@ extension Kernel.File.Direct {
 
         case invalidHandle
 
-        case platform(code: Error_Primitives.Error.Code, operation: Operation)
+        case platform(code: Error.Error.Code, operation: Operation)
     }
 }
 

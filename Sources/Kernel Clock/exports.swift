@@ -1,4 +1,4 @@
-@_exported public import Clock_Primitives
+@_exported public import Clock
 
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS) || os(Linux) || os(Android) || os(OpenBSD)
     @_exported public import POSIX_Kernel_Clock

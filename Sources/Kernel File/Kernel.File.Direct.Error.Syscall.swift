@@ -1,10 +1,10 @@
-public import Error_Primitives
+public import Error
 
 extension Kernel.File.Direct.Error {
 
     public enum Syscall: Swift.Error, Sendable, Equatable {
 
-        case platform(code: Error_Primitives.Error.Code, operation: Operation)
+        case platform(code: Error.Error.Code, operation: Operation)
 
         case invalidDescriptor(operation: Operation)
 

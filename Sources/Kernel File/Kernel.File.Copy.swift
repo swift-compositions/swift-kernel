@@ -1,5 +1,5 @@
-internal import Error_Primitives
-public import Path_Primitives
+internal import Error
+public import Path
 
 extension Kernel.File.Copy {
 

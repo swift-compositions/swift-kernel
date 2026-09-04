@@ -7,7 +7,7 @@
     import Buffer_Linear
     import Storage_Primitive
     import Storage_Contiguous
-    import Memory_Heap
+    import Memory
     import Memory_Allocator_Primitive
 
     extension Kernel.Event {

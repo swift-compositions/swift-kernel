@@ -267,7 +267,7 @@ let package = Package(
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Dictionary", package: "swift-dictionary"),
                 .product(name: "Hash Indexed Primitive", package: "swift-hash-table"),
-                .product(name: "Hash Tagged", package: "swift-hash"),
+                .product(name: "Hash", package: "swift-hash"),
                 .product(name: "Buffer Primitive", package: "swift-buffer"),
                 .product(
                     name: "Buffer Linear Primitive",

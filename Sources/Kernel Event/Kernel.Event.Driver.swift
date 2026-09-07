@@ -1,7 +1,7 @@
 #if !os(Windows)
     import Dictionary
     import Hash_Indexed_Primitive
-    import Hash_Tagged
+    import Hash
     import Buffer_Primitive
     import Buffer_Linear_Primitive
     import Buffer_Linear

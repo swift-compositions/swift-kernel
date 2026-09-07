@@ -87,7 +87,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-dimension.git",
+            url: "https://github.com/swift-atoms/swift-spatial.git",
             branch: "main"
         ),
         .package(
@@ -180,7 +180,7 @@ let package = Package(
                 .product(name: "Path", package: "swift-path"),
                 .product(name: "Reference", package: "swift-reference"),
                 .product(name: "Ownership", package: "swift-ownership"),
-                .product(name: "Dimension", package: "swift-dimension"),
+                .product(name: "Spatial", package: "swift-spatial"),
                 .product(name: "Queue", package: "swift-queue"),
                 .product(
                     name: "POSIX Kernel",

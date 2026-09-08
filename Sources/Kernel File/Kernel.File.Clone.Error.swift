@@ -16,7 +16,7 @@ extension Kernel.File.Clone {
 
         case isDirectory
 
-        case platform(code: Error.Error.Code, operation: Operation)
+        case platform(code: Error::Error.Code, operation: Operation)
     }
 }
 

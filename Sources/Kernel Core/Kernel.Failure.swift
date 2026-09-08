@@ -71,7 +71,7 @@ extension Kernel.Failure: CustomStringConvertible {
 
 extension Kernel.Failure {
     public init?(
-        _ code: Error.Error.Code
+        _ code: Error::Error.Code
     ) {
 
         if let e = Path.Resolution.Error(code: code) {
@@ -118,7 +118,7 @@ extension Kernel.Failure {
 
 extension Kernel.Failure {
 
-    public static func message(for code: Error.Error.Code) -> Swift.String? {
+    public static func message(for code: Error::Error.Code) -> Swift.String? {
         #if os(Windows)
             code.win32Message
         #else

@@ -1,5 +1,5 @@
 import Kernel_Test_Support
-import Tagged_Standard_Library_Integration
+import Tagged
 import Testing
 
 @testable import Kernel

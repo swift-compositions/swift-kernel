@@ -1,3 +1,6 @@
+import Error
+public import Terminal_Error
+
 #if !os(Windows)
     @_spi(Syscall) import POSIX_Kernel_Terminal
 #endif
@@ -37,7 +40,7 @@ extension Terminal.Mode.Raw.Token {
     extension Terminal.Mode.Raw {
 
         public func enter() throws(Terminal.Error) -> Token {
-            do throws(Error.Error) {
+            do throws(Error::Error) {
                 let original = try ISO_9945.Kernel.Termios.Attributes.get(fd: stream.rawValue)
                 let raw = original.withRaw()
                 try ISO_9945.Kernel.Termios.Attributes.set(raw, fd: stream.rawValue)
@@ -55,7 +58,7 @@ extension Terminal.Mode.Raw.Token {
             guard case .posix(let attrs) = previous else {
                 throw Terminal.Error(operation: .exitRaw, underlying: .unsupported)
             }
-            do throws(Error.Error) {
+            do throws(Error::Error) {
                 try ISO_9945.Kernel.Termios.Attributes.set(attrs, fd: stream.rawValue)
                 restored = true
             } catch let error {

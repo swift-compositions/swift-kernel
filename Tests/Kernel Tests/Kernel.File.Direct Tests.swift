@@ -1,7 +1,7 @@
 import Error
 import Kernel_Test_Support
 import Path
-import Tagged_Standard_Library_Integration
+import Tagged
 import Testing
 
 @testable import Kernel

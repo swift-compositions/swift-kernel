@@ -19,7 +19,7 @@ extension Kernel.File.Direct.Error {
     }
 
     @usableFromInline
-    internal init(code: Error.Error.Code, operation: Operation) {
+    internal init(code: Error::Error.Code, operation: Operation) {
         #if os(Windows)
             self = .platform(code: code, operation: operation)
         #else
@@ -30,7 +30,7 @@ extension Kernel.File.Direct.Error {
             case _ where code == .POSIX.EBADF:
                 self = .invalidHandle
 
-            case _ where Error.Error.Code.POSIX.isENOTSUP(code):
+            case _ where Error::Error.Code.POSIX.isENOTSUP(code):
                 self = .notSupported
 
             default:

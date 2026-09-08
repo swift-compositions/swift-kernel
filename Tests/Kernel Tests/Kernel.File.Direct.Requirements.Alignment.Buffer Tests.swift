@@ -1,5 +1,5 @@
 import Kernel
-import Tagged_Standard_Library_Integration
+import Tagged
 import Testing
 
 extension Kernel.File.Direct.Requirements.Alignment.Buffer {

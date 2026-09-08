@@ -1,7 +1,7 @@
 #if os(Linux)
 
     import Testing
-    import Tagged_Standard_Library_Integration
+    import Tagged
     import Kernel
 
     extension Kernel.Copy.Range {

@@ -58,6 +58,8 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-molecules/swift-storage-memory.git", branch: "main"),
+        .package(url: "https://github.com/swift-molecules/swift-terminal-error.git", branch: "main"),
         .package(
             url: "https://github.com/swift-molecules/swift-clock.git",
             branch: "main"
@@ -83,7 +85,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-ascii.git",
+            url: "https://github.com/swift-atoms/swift-ascii.git",
             branch: "main"
         ),
         .package(
@@ -103,7 +105,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-error.git",
+            url: "https://github.com/swift-atoms/swift-error.git",
             branch: "main"
         ),
         .package(
@@ -135,7 +137,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-buffer.git",
+            url: "https://github.com/swift-atoms/swift-buffer.git",
             branch: "main"
         ),
         .package(
@@ -143,7 +145,7 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-storage.git",
+            url: "https://github.com/swift-atoms/swift-storage.git",
             branch: "main"
         ),
         .package(
@@ -154,7 +156,7 @@ let package = Package(
             url: "https://github.com/swift-molecules/swift-terminal.git",
             branch: "main"
         ),
-        .package(url: "https://github.com/swift-compositions/swift-cpu.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-cpu.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-posix.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-darwin.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-linux.git", branch: "main"),
@@ -268,7 +270,7 @@ let package = Package(
                 .product(name: "Dictionary", package: "swift-dictionary"),
                 .product(name: "Hash Indexed Primitive", package: "swift-hash-table"),
                 .product(name: "Hash", package: "swift-hash"),
-                .product(name: "Buffer Primitive", package: "swift-buffer"),
+                .product(name: "Buffer", package: "swift-buffer"),
                 .product(
                     name: "Buffer Linear Primitive",
                     package: "swift-buffer-linear"
@@ -277,14 +279,14 @@ let package = Package(
                     name: "Buffer Linear",
                     package: "swift-buffer-linear"
                 ),
-                .product(name: "Storage Primitive", package: "swift-storage"),
+                .product(name: "Storage", package: "swift-storage"),
                 .product(
-                    name: "Storage Contiguous",
-                    package: "swift-storage"
+                    name: "Storage Memory",
+                    package: "swift-storage-memory"
                 ),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(
-                    name: "Memory Allocator Primitive",
+                    name: "Memory Allocator",
                     package: "swift-memory-allocation"
                 ),
                 .product(
@@ -339,6 +341,7 @@ let package = Package(
         .target(
             name: "Kernel Terminal",
             dependencies: [
+                .product(name: "Terminal Error", package: "swift-terminal-error"),
                 "Kernel Core",
                 .product(name: "Terminal", package: "swift-terminal"),
                 .product(
@@ -436,7 +439,7 @@ let package = Package(
                 "Kernel Completion",
                 "Kernel Test Support",
                 .product(
-                    name: "Tagged Standard Library Integration",
+                    name: "Tagged",
                     package: "swift-tagged"
                 ),
             ],

@@ -58,6 +58,7 @@ let package = Package(
         ),
     ],
     dependencies: [
+        .package(url: "https://github.com/swift-atoms/swift-serializer.git", branch: "main", traits: ["Either", "Map", "Pair", "Repetition", "Always", "Byte"]),
         .package(url: "https://github.com/swift-atoms/swift-parser.git", branch: "main", traits: ["Map", "IteratorLeaves", "Product", "Skip", "Append", "Either", "Iterator"]),
         .package(
             url: "https://github.com/swift-atoms/swift-clock.git",
@@ -69,7 +70,8 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-binary.git",
-            branch: "main"
+            branch: "main",
+            traits: ["Serializer"]
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-cardinal.git",

@@ -57,7 +57,7 @@
 
                 final class Shared {
 
-                    typealias Registry = Dictionary.Dictionary<
+                    typealias Registry = Dictionary::Dictionary<
                         Kernel.Event.ID, Registration
                     >
                     var nextID = Kernel.Event.ID.zero

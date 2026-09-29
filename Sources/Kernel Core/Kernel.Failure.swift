@@ -27,7 +27,7 @@ extension Kernel {
 
         case blocking(Kernel.IO.Blocking.Error)
 
-        case platform(Error.Error)
+        case platform(Error::Error)
     }
 }
 

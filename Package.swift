@@ -88,7 +88,7 @@ let package = Package(
         .package(
             url: "https://github.com/swift-atoms/swift-ascii.git",
             branch: "main",
-            traits: ["Parser", "Serializer"]
+            traits: ["Coder", "Parser", "Serializer"]
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-spatial.git",

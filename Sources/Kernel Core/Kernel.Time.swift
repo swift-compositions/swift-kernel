@@ -1,4 +1,4 @@
-extension Instant {
+extension Time.Instant {
 
     @inlinable
     package init(seconds: Int64, nanoseconds: Int32) {

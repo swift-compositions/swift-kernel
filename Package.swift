@@ -154,7 +154,6 @@ let package = Package(
         .package(url: "https://github.com/swift-compositions/swift-linux.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-windows.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-strings.git", branch: "main"),
-        .package(url: "https://github.com/swift-compositions/swift-test-application.git", branch: "main"),
     ],
     targets: [
 
@@ -433,7 +432,6 @@ let package = Package(
                     package: "swift-tagged"
                 ),
                 .product(name: "System", package: "swift-system"),
-                .product(name: "Testing", package: "swift-test-application"),
             ],
             path: "Tests/Kernel Tests"
         ),

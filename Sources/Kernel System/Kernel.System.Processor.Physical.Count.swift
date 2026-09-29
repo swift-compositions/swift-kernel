@@ -1,8 +1,8 @@
 #if os(Linux) || os(Android) || os(OpenBSD) || os(Windows)
-    extension System.Processor.Physical {
+    extension System {
 
         @inlinable
-        public static var count: System.Processor.Count {
+        public static var physicalProcessorCount: Int {
             System.processorCount
         }
     }

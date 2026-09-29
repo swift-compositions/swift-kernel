@@ -58,30 +58,28 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-molecules/swift-storage-memory.git", branch: "main"),
-        .package(url: "https://github.com/swift-molecules/swift-terminal-error.git", branch: "main"),
         .package(
-            url: "https://github.com/swift-molecules/swift-clock.git",
+            url: "https://github.com/swift-atoms/swift-clock.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-system.git",
+            url: "https://github.com/swift-atoms/swift-system.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-binary.git",
+            url: "https://github.com/swift-atoms/swift-binary.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-cardinal.git",
+            url: "https://github.com/swift-atoms/swift-cardinal.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-tagged.git",
+            url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-time.git",
+            url: "https://github.com/swift-atoms/swift-time.git",
             branch: "main"
         ),
         .package(
@@ -93,15 +91,15 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-queue.git",
+            url: "https://github.com/swift-atoms/swift-queue.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-reference.git",
+            url: "https://github.com/swift-atoms/swift-reference.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-ownership.git",
+            url: "https://github.com/swift-atoms/swift-ownership.git",
             branch: "main"
         ),
         .package(
@@ -109,19 +107,19 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-random.git",
+            url: "https://github.com/swift-atoms/swift-random.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-path.git",
+            url: "https://github.com/swift-atoms/swift-path.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-string.git",
+            url: "https://github.com/swift-atoms/swift-string.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-memory.git",
+            url: "https://github.com/swift-atoms/swift-memory.git",
             branch: "main"
         ),
         .package(
@@ -142,22 +140,21 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-storage.git",
-            branch: "main"
-        ),
+            branch: "main", traits: ["Generational", "Memory"]),
         .package(
             url: "https://github.com/swift-molecules/swift-memory-allocation.git",
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-molecules/swift-terminal.git",
-            branch: "main"
-        ),
+            url: "https://github.com/swift-atoms/swift-terminal.git",
+            branch: "main", traits: ["Error"]),
         .package(url: "https://github.com/swift-atoms/swift-cpu.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-posix.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-darwin.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-linux.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-windows.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-strings.git", branch: "main"),
+        .package(url: "https://github.com/swift-compositions/swift-test-application.git", branch: "main"),
     ],
     targets: [
 
@@ -225,7 +222,9 @@ let package = Package(
 
         .target(
             name: "Kernel System",
-            dependencies: ["Kernel Core"]
+            dependencies: ["Kernel Core",
+                .product(name: "System", package: "swift-system"),
+            ]
         ),
 
         .target(
@@ -239,6 +238,7 @@ let package = Package(
                     package: "swift-windows",
                     condition: .when(platforms: [.windows])
                 ),
+                .product(name: "Cardinal", package: "swift-cardinal"),
             ]
         ),
 
@@ -275,10 +275,6 @@ let package = Package(
                     package: "swift-buffer-linear"
                 ),
                 .product(name: "Storage", package: "swift-storage"),
-                .product(
-                    name: "Storage Memory",
-                    package: "swift-storage-memory"
-                ),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(
                     name: "Memory Allocator",
@@ -336,7 +332,6 @@ let package = Package(
         .target(
             name: "Kernel Terminal",
             dependencies: [
-                .product(name: "Terminal Error", package: "swift-terminal-error"),
                 "Kernel Core",
                 .product(name: "Terminal", package: "swift-terminal"),
                 .product(
@@ -437,6 +432,8 @@ let package = Package(
                     name: "Tagged",
                     package: "swift-tagged"
                 ),
+                .product(name: "System", package: "swift-system"),
+                .product(name: "Testing", package: "swift-test-application"),
             ],
             path: "Tests/Kernel Tests"
         ),

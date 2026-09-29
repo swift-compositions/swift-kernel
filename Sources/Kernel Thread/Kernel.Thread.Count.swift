@@ -6,8 +6,11 @@ extension Kernel.Thread {
 extension Kernel.Thread.Count {
 
     @inlinable
-    public init(_ processorCount: System.Processor.Count) {
-        self = processorCount.retag(Kernel.Thread.self)
+    public init(_ processorCount: Int) {
+        guard let count = UInt(exactly: processorCount) else {
+            preconditionFailure("Thread count must be nonnegative")
+        }
+        self.init(_unchecked: Cardinal(count))
     }
 }
 
@@ -15,6 +18,9 @@ extension Int {
 
     @inlinable
     public init(_ count: Kernel.Thread.Count) {
-        self = Int(bitPattern: count)
+        guard let value = Int(exactly: count.underlying.rawValue) else {
+            preconditionFailure("Thread count is not representable as Int")
+        }
+        self = value
     }
 }

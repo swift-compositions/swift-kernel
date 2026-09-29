@@ -151,7 +151,7 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-terminal.git",
-            branch: "main", traits: ["Error"]),
+            branch: "main", traits: ["Error", "Input"]),
         .package(url: "https://github.com/swift-atoms/swift-cpu.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-posix.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-darwin.git", branch: "main"),

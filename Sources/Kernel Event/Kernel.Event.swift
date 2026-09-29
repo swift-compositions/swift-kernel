@@ -1,3 +1,5 @@
+import Tagged
+
 extension Kernel {
 
     public struct Event: Sendable, Equatable {
@@ -18,7 +20,7 @@ extension Kernel {
 
 extension Kernel.Event {
 
-    public static let empty = Self(id: .zero, interest: [], flags: [])
+    public static let empty = Self(id: ID(_unchecked: 0), interest: [], flags: [])
 }
 
 extension Kernel.Event: CustomStringConvertible {

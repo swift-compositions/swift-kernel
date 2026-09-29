@@ -60,7 +60,7 @@
                     typealias Registry = Dictionary::Dictionary<
                         Kernel.Event.ID, Registration
                     >
-                    var nextID = Kernel.Event.ID.zero
+                    var nextID = Kernel.Event.ID(_unchecked: 0)
                     var registry = Registry()
                 }
 

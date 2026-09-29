@@ -124,7 +124,8 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-memory.git",
-            branch: "main"
+            branch: "main",
+            traits: ["Lock", "Map", "Shared", "Cursor"]
         ),
         .package(
             url: "https://github.com/swift-molecules/swift-dictionary.git",

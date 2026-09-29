@@ -3,7 +3,7 @@
     extension Kernel.Lock.Acquire {
 
         public static func timeout(_ duration: Duration) -> Self {
-            .deadline(Clock.Continuous.now.advanced(by: duration))
+            .deadline(.init(offset: Clock.Continuous.now.offset + duration))
         }
     }
 

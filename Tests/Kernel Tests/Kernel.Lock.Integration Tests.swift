@@ -4,9 +4,6 @@ import Testing
 
 @testable import Kernel
 
-#if canImport(Foundation)
-    import Foundation
-#endif
 
 @Suite
 struct `Kernel.Lock Integration` {}
@@ -82,56 +79,6 @@ extension `Kernel.Lock Integration` {
 
     extension `Kernel.Lock Integration` {
 
-        private static let helperName = "_Lock Test Process"
-
-        private static var helperPath: Swift.String {
-            let fileManager = FileManager.default
-            for directory in productDirectories {
-                let candidate = directory.appendingPathComponent(helperName)
-                if fileManager.isExecutableFile(atPath: candidate.path) { return candidate.path }
-            }
-            return packageRoot.appendingPathComponent(helperName).path
-        }
-
-        private static var packageRoot: URL {
-            URL(fileURLWithPath: #filePath)
-                .deletingLastPathComponent()
-                .deletingLastPathComponent()
-                .deletingLastPathComponent()
-        }
-
-        private static var productDirectories: [URL] {
-            var directories: [URL] = []
-            if let builtProductsDirectory = ProcessInfo.processInfo.environment[
-                "BUILT_PRODUCTS_DIR"
-            ] {
-                directories.append(URL(fileURLWithPath: builtProductsDirectory))
-            }
-            let buildRoot = packageRoot.appendingPathComponent(".build")
-            for configuration in ["Debug", "Release"] {
-                directories.append(
-                    buildRoot
-                        .appendingPathComponent("out")
-                        .appendingPathComponent("Products")
-                        .appendingPathComponent(configuration)
-                )
-            }
-            for configuration in ["debug", "release"] {
-                directories.append(buildRoot.appendingPathComponent(configuration))
-            }
-            let contents =
-                (try? FileManager.default.contentsOfDirectory(
-                    at: buildRoot,
-                    includingPropertiesForKeys: nil
-                )) ?? []
-            for triple in contents {
-                for configuration in ["debug", "release"] {
-                    directories.append(triple.appendingPathComponent(configuration))
-                }
-            }
-            return directories
-        }
-
         @Test
         func `exclusive lock blocks try-exclusive from another process`() throws {
             let path = try createLockFile(prefix: "kernel-contention")
@@ -145,20 +92,9 @@ extension `Kernel.Lock Integration` {
                 acquire: .wait
             )
 
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: Self.helperPath)
-            process.arguments = ["try-exclusive", path, "--signal-ready"]
+            let (status, output) = try Self.runHelper(["try-exclusive", path, "--signal-ready"])
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-
-            try process.run()
-            process.waitUntilExit()
-
-            let outputData = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = Swift.String(data: outputData, encoding: .utf8) ?? ""
-
-            #expect(process.terminationStatus == 1, "Helper should exit with 1 (would block)")
+            #expect(status == 1, "Helper should exit with 1 (would block)")
             #expect(output.contains("WOULD_BLOCK"), "Helper should report WOULD_BLOCK")
 
             try token.release()
@@ -177,20 +113,9 @@ extension `Kernel.Lock Integration` {
                 acquire: .wait
             )
 
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: Self.helperPath)
-            process.arguments = ["try-shared", path]
+            let (status, output) = try Self.runHelper(["try-shared", path])
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-
-            try process.run()
-            process.waitUntilExit()
-
-            let outputData = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = Swift.String(data: outputData, encoding: .utf8) ?? ""
-
-            #expect(process.terminationStatus == 1, "Helper should exit with 1 (would block)")
+            #expect(status == 1, "Helper should exit with 1 (would block)")
             #expect(output.contains("WOULD_BLOCK"), "Helper should report WOULD_BLOCK")
 
             try token.release()
@@ -209,20 +134,9 @@ extension `Kernel.Lock Integration` {
                 acquire: .wait
             )
 
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: Self.helperPath)
-            process.arguments = ["try-shared", path, "--hold", "0", "--signal-ready"]
+            let (status, output) = try Self.runHelper(["try-shared", path, "--hold", "0", "--signal-ready"])
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-
-            try process.run()
-            process.waitUntilExit()
-
-            let outputData = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = Swift.String(data: outputData, encoding: .utf8) ?? ""
-
-            #expect(process.terminationStatus == 0, "Helper should exit with 0 (success)")
+            #expect(status == 0, "Helper should exit with 0 (success)")
             #expect(output.contains("READY"), "Helper should report READY")
             #expect(output.contains("RELEASED"), "Helper should report RELEASED")
 
@@ -242,20 +156,9 @@ extension `Kernel.Lock Integration` {
                 acquire: .wait
             )
 
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: Self.helperPath)
-            process.arguments = ["try-exclusive", path]
+            let (status, output) = try Self.runHelper(["try-exclusive", path])
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-
-            try process.run()
-            process.waitUntilExit()
-
-            let outputData = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = Swift.String(data: outputData, encoding: .utf8) ?? ""
-
-            #expect(process.terminationStatus == 1, "Helper should exit with 1 (would block)")
+            #expect(status == 1, "Helper should exit with 1 (would block)")
             #expect(output.contains("WOULD_BLOCK"), "Helper should report WOULD_BLOCK")
 
             try token.release()
@@ -274,22 +177,11 @@ extension `Kernel.Lock Integration` {
                 acquire: .wait
             )
 
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: Self.helperPath)
-            process.arguments = [
+            let (status, output) = try Self.runHelper([
                 "try-exclusive", path, "--range", "200-300", "--hold", "0", "--signal-ready",
-            ]
+            ])
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-
-            try process.run()
-            process.waitUntilExit()
-
-            let outputData = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = Swift.String(data: outputData, encoding: .utf8) ?? ""
-
-            #expect(process.terminationStatus == 0, "Helper should exit with 0 (success)")
+            #expect(status == 0, "Helper should exit with 0 (success)")
             #expect(output.contains("READY"), "Helper should report READY")
 
             try token.release()
@@ -308,20 +200,9 @@ extension `Kernel.Lock Integration` {
                 acquire: .wait
             )
 
-            let process = Process()
-            process.executableURL = URL(fileURLWithPath: Self.helperPath)
-            process.arguments = ["try-exclusive", path, "--range", "100-300"]
+            let (status, output) = try Self.runHelper(["try-exclusive", path, "--range", "100-300"])
 
-            let pipe = Pipe()
-            process.standardOutput = pipe
-
-            try process.run()
-            process.waitUntilExit()
-
-            let outputData = pipe.fileHandleForReading.readDataToEndOfFile()
-            let output = Swift.String(data: outputData, encoding: .utf8) ?? ""
-
-            #expect(process.terminationStatus == 1, "Helper should exit with 1 (would block)")
+            #expect(status == 1, "Helper should exit with 1 (would block)")
             #expect(output.contains("WOULD_BLOCK"), "Helper should report WOULD_BLOCK")
 
             try token.release()

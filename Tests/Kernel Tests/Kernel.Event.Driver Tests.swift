@@ -76,7 +76,7 @@
         @Test
         func `poll re-arms for residual interest after partial delivery`() throws {
             var armInterests: [Kernel.Event.Interest] = []
-            var registeredID = Kernel.Event.ID.zero
+            var registeredID = Kernel.Event.ID(_unchecked: 0)
             var shouldDeliver = false
 
             let driver = Kernel.Event.Driver(
@@ -114,7 +114,7 @@
         @Test
         func `poll does not re-arm when all interests are delivered`() throws {
             var armCallCount = 0
-            var registeredID = Kernel.Event.ID.zero
+            var registeredID = Kernel.Event.ID(_unchecked: 0)
             var shouldDeliver = false
 
             let driver = Kernel.Event.Driver(
@@ -149,7 +149,7 @@
         @Test
         func `single interest has no residual after delivery`() throws {
             var armInterests: [Kernel.Event.Interest] = []
-            var registeredID = Kernel.Event.ID.zero
+            var registeredID = Kernel.Event.ID(_unchecked: 0)
             var shouldDeliver = false
 
             let driver = Kernel.Event.Driver(
@@ -183,7 +183,7 @@
         @Test
         func `delivery resets armed interest — subsequent arm starts fresh`() throws {
             var armInterests: [Kernel.Event.Interest] = []
-            var registeredID = Kernel.Event.ID.zero
+            var registeredID = Kernel.Event.ID(_unchecked: 0)
             var shouldDeliver = false
 
             let driver = Kernel.Event.Driver(

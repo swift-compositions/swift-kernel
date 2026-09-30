@@ -63,7 +63,7 @@
                     init(kq: consuming Kernel.Kqueue, maxEvents: Int) {
                         self.kq = kq
                         self.rawEvents = [Kernel.Kqueue.Event](
-                            repeating: Kernel.Kqueue.Event(id: .zero, filter: .read, flags: .none),
+                            repeating: Kernel.Kqueue.Event(id: .init(_unchecked: 0), filter: .read, flags: .none),
                             count: maxEvents
                         )
                     }

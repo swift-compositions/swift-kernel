@@ -167,7 +167,7 @@
                             output: inout [Kernel.Event]
                         ) throws(Kernel.Event.Driver.Error) -> Int in
 
-                        let timeout = deadline.map { $0.remaining(at: Clock.Continuous.now) }
+                        let timeout = deadline.flatMap { $0.remaining(at: Clock.Continuous.now) }
 
                         let requestCount = min(state.rawEvents.count, output.count)
                         guard requestCount > 0 else { return 0 }

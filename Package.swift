@@ -180,7 +180,7 @@ let package = Package(
                 .product(name: "Path", package: "swift-path"),
                 .product(name: "Reference", package: "swift-reference"),
                 .product(name: "Ownership", package: "swift-ownership"),
-                .product(name: "Spatial", package: "swift-spatial"),
+                .product(name: "Space", package: "swift-spatial"),
                 .product(name: "Queue", package: "swift-queue"),
                 .product(
                     name: "POSIX Kernel",

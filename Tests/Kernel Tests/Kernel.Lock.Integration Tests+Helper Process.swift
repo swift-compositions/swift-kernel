@@ -22,7 +22,16 @@
         }
 
         static var productDirectories: [URL] {
-            var directories: [URL] = []
+            let arguments = ProcessInfo.processInfo.arguments
+            let bundlePaths =
+                Bundle.allBundles.map(\.bundleURL.path)
+                + arguments.indices.dropLast().filter { arguments[$0] == "--test-bundle-path" }.map { arguments[$0 + 1] }
+                + arguments.prefix(1)
+            var directories: [URL] = bundlePaths.map { path in
+                let components = URL(fileURLWithPath: path).pathComponents
+                let bundle = components.lastIndex { $0.hasSuffix(".xctest") }
+                return URL(fileURLWithPath: NSString.path(withComponents: Array(components[..<(bundle ?? components.count - 1)])))
+            }
             if let builtProductsDirectory = ProcessInfo.processInfo.environment[
                 "BUILT_PRODUCTS_DIR"
             ] {

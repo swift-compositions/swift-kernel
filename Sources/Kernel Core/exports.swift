@@ -29,4 +29,5 @@
     @_exported public import Windows_Kernel
     @_exported public import Windows_Kernel_Clock
     @_exported public import Windows_Kernel_Process
+    @_exported public import Windows_Kernel_Lock
 #endif

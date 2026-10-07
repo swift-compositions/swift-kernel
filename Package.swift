@@ -222,6 +222,11 @@ let package = Package(
                     package: "swift-windows",
                     condition: .when(platforms: [.windows])
                 ),
+                .product(
+                    name: "Windows Kernel Lock",
+                    package: "swift-windows",
+                    condition: .when(platforms: [.windows])
+                ),
             ]
         ),
 

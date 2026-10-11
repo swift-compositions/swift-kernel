@@ -11,7 +11,7 @@
                 case .create(let code): self = .platform(code)
                 case .ctl(let code): self = .platform(code)
                 case .wait(let code): self = .platform(code)
-                case .interrupted: self = .platform(.POSIX.EINTR)
+                case .interrupted: self = .platform(.EINTR)
                 }
             }
 
@@ -20,7 +20,7 @@
                 case .create(let code): self = .platform(code)
                 case .read(let code): self = .platform(code)
                 case .write(let code): self = .platform(code)
-                case .wouldBlock: self = .platform(.POSIX.EAGAIN)
+                case .wouldBlock: self = .platform(.EAGAIN)
                 }
             }
         }
@@ -180,7 +180,7 @@
                             try state.epoll.remove(fd: fd)
                         } catch {
                             if case .ctl(let code) = error,
-                                code == .POSIX.ENOENT || code == .POSIX.EBADF
+                                code == .ENOENT || code == .EBADF
                             {
                                 return
                             }

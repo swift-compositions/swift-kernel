@@ -11,7 +11,7 @@
             case .setup(let code): self = .platform(code)
             case .enter(let code): self = .platform(code)
             case .register(let code): self = .platform(code)
-            case .interrupted: self = .platform(.POSIX.EINTR)
+            case .interrupted: self = .platform(.EINTR)
             }
         }
 
@@ -233,7 +233,7 @@
                     if cqe.isSuccess {
                         Int32(cqe.bytes.transferred!)
                     } else {
-                        -Int32(cqe.errorNumber!.underlying)
+                        -cqe.errorCode!.posix!
                     }
 
                 visitor(

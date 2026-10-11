@@ -17,23 +17,23 @@ extension Kernel.File.Clone.Error {
             self = .platform(code: code, operation: operation)
         #else
             switch code {
-            case _ where code == .POSIX.ENOENT:
+            case _ where code == .ENOENT:
                 self = .sourceNotFound
 
-            case _ where code == .POSIX.EEXIST:
+            case _ where code == .EEXIST:
                 self = .destinationExists
 
-            case _ where code == .POSIX.EACCES,
-                _ where code == .POSIX.EPERM:
+            case _ where code == .EACCES,
+                _ where code == .EPERM:
                 self = .permissionDenied
 
-            case _ where code == .POSIX.EXDEV:
+            case _ where code == .EXDEV:
                 self = .crossDevice
 
-            case _ where code == .POSIX.EISDIR:
+            case _ where code == .EISDIR:
                 self = .isDirectory
 
-            case _ where Error::Error.Code.POSIX.isENOTSUP(code):
+            case _ where code == .ENOTSUP:
                 self = .notSupported
 
             default:

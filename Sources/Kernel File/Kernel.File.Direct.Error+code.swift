@@ -11,7 +11,7 @@ extension Kernel.File.Direct.Error {
             #if os(Windows)
                 self = .platform(code: .win32(87), operation: operation)
             #else
-                self = .platform(code: .POSIX.EINVAL, operation: operation)
+                self = .platform(code: .EINVAL, operation: operation)
             #endif
 
         case .notSupported:
@@ -28,10 +28,10 @@ extension Kernel.File.Direct.Error {
             self = .platform(code: code, operation: operation)
         #else
             switch code {
-            case _ where code == .POSIX.EBADF:
+            case _ where code == .EBADF:
                 self = .invalidHandle
 
-            case _ where Error::Error.Code.POSIX.isENOTSUP(code):
+            case _ where code == .ENOTSUP:
                 self = .notSupported
 
             default:

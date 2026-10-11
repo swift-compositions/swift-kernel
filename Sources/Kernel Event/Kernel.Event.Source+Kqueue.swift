@@ -10,7 +10,7 @@
                 switch kqueueError {
                 case .create(let code): self = .platform(code)
                 case .kevent(let code): self = .platform(code)
-                case .interrupted: self = .platform(.POSIX.EINTR)
+                case .interrupted: self = .platform(.EINTR)
                 }
             }
         }
@@ -138,7 +138,7 @@
                             try state.kq.register(events: events)
                         } catch {
                             if case .kevent(let code) = error,
-                                code == .POSIX.ENOENT || code == .POSIX.EBADF
+                                code == .ENOENT || code == .EBADF
                             {
                                 return
                             }

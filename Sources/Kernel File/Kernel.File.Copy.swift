@@ -64,7 +64,7 @@ extension Kernel.File.Copy {
                 }
             #else
                 if case .platform(let platformError) = error,
-                    platformError.code == .POSIX.ENOENT
+                    platformError.code == .ENOENT
                 {
                     throw .sourceNotFound
                 }

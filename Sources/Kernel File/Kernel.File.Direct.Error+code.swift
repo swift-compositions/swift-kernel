@@ -8,7 +8,11 @@ extension Kernel.File.Direct.Error {
             self = .invalidHandle
 
         case .alignmentViolation(let operation):
-            self = .platform(code: .posix(-1), operation: operation)
+            #if os(Windows)
+                self = .platform(code: .win32(87), operation: operation)
+            #else
+                self = .platform(code: .POSIX.EINVAL, operation: operation)
+            #endif
 
         case .notSupported:
             self = .notSupported
@@ -24,9 +28,6 @@ extension Kernel.File.Direct.Error {
             self = .platform(code: code, operation: operation)
         #else
             switch code {
-            case _ where code == .POSIX.EINVAL:
-                self = .platform(code: code, operation: operation)
-
             case _ where code == .POSIX.EBADF:
                 self = .invalidHandle
 

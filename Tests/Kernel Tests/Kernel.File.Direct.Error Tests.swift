@@ -199,3 +199,27 @@ extension Kernel.File.Direct.Error.Test.EdgeCase {
         }
     }
 }
+
+#if canImport(Darwin) || canImport(Glibc) || canImport(Musl)
+    #if canImport(Darwin)
+        import Darwin
+    #elseif canImport(Glibc)
+        import Glibc
+    #elseif canImport(Musl)
+        import Musl
+    #endif
+
+    extension Kernel.File.Direct.Error.Test.EdgeCase {
+        @Test
+        func `alignment violation reports EINVAL per open(2) O_DIRECT and POSIX.1-2024 read`() {
+            let error = Kernel.File.Direct.Error(from: .alignmentViolation(operation: .read))
+            #expect(error == .platform(code: .posix(EINVAL), operation: .read))
+        }
+
+        @Test
+        func `no mapping fabricates errno -1`() {
+            let error = Kernel.File.Direct.Error(from: .alignmentViolation(operation: .write))
+            #expect(error != .platform(code: .posix(-1), operation: .write))
+        }
+    }
+#endif

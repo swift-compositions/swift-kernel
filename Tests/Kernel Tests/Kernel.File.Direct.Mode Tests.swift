@@ -104,3 +104,15 @@ extension Kernel.File.Direct.Mode.Test.EdgeCase {
         #expect(fallback != error)
     }
 }
+
+#if canImport(Darwin)
+    extension Kernel.File.Direct.Mode.Test.Unit {
+        @Test
+        func `uncached resolves to F_NOCACHE on every Darwin platform per fcntl(2)`() throws {
+            let resolved = try Kernel.File.Direct.Mode.uncached.resolve(
+                given: .unknown(reason: .platformUnsupported)
+            )
+            #expect(resolved == .uncached)
+        }
+    }
+#endif

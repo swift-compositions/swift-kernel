@@ -10,15 +10,7 @@ extension Kernel.File.Direct {
     public static func requirements(
         for path: borrowing Path
     ) -> Requirements {
-        #if os(macOS)
-            return .unknown(reason: .platformUnsupported)
-        #elseif os(Linux)
-            return .unknown(reason: .sectorSizeUndetermined)
-        #elseif os(Windows)
-            return .known(Requirements.Alignment(uniform: .`4096`))
-        #else
-            return .unknown(reason: .platformUnsupported)
-        #endif
+        .platformDefault
     }
 }
 

@@ -17,16 +17,16 @@ extension Kernel.File.Direct.Mode {
     public func resolve(
         given requirements: Kernel.File.Direct.Requirements
     ) throws(Kernel.File.Direct.Error) -> Resolved {
-        #if os(macOS)
-            return try resolveMacOS()
+        #if canImport(Darwin)
+            return try resolveDarwin()
         #else
             return try resolveLinuxWindows(requirements: requirements)
         #endif
     }
 
-    #if os(macOS)
+    #if canImport(Darwin)
 
-        private func resolveMacOS() throws(Kernel.File.Direct.Error) -> Resolved {
+        private func resolveDarwin() throws(Kernel.File.Direct.Error) -> Resolved {
             switch self {
             case .direct:
 
@@ -45,7 +45,7 @@ extension Kernel.File.Direct.Mode {
         }
     #endif
 
-    #if !os(macOS)
+    #if !canImport(Darwin)
 
         private func resolveLinuxWindows(
             requirements: Kernel.File.Direct.Requirements

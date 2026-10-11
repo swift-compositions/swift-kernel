@@ -13,14 +13,18 @@ extension Kernel.File.Direct {
 extension Kernel.File.Direct.Requirements {
 
     public init(_ path: borrowing Path.Borrowed) {
-        #if os(macOS)
-            self = .unknown(reason: .platformUnsupported)
+        self = .platformDefault
+    }
+
+    internal static var platformDefault: Self {
+        #if canImport(Darwin)
+            .unknown(reason: .platformUnsupported)
         #elseif os(Linux)
-            self = .unknown(reason: .sectorSizeUndetermined)
+            .unknown(reason: .sectorSizeUndetermined)
         #elseif os(Windows)
-            self = .known(Alignment(uniform: .`4096`))
+            .known(Alignment(uniform: .`4096`))
         #else
-            self = .unknown(reason: .platformUnsupported)
+            .unknown(reason: .platformUnsupported)
         #endif
     }
 }

@@ -11,26 +11,24 @@ extension Terminal.Mode.Raw {
 
         public let stream: Terminal.Stream
 
-        public let previous: Previous
+        #if os(Windows)
+            public let previous: UInt32
+        #else
+            public let previous: ISO_9945.Kernel.Termios.Attributes
+        #endif
 
         public var restored: Bool = false
 
-        public init(stream: Terminal.Stream, previous: Previous) {
-            self.stream = stream
-            self.previous = previous
-        }
-    }
-}
-
-extension Terminal.Mode.Raw.Token {
-
-    public enum Previous: Sendable {
-        #if !os(Windows)
-            case posix(ISO_9945.Kernel.Termios.Attributes)
-        #endif
-
         #if os(Windows)
-            case windows(UInt32)
+            public init(stream: Terminal.Stream, previous: UInt32) {
+                self.stream = stream
+                self.previous = previous
+            }
+        #else
+            public init(stream: Terminal.Stream, previous: ISO_9945.Kernel.Termios.Attributes) {
+                self.stream = stream
+                self.previous = previous
+            }
         #endif
     }
 }
@@ -44,7 +42,7 @@ extension Terminal.Mode.Raw.Token {
                 let original = try ISO_9945.Kernel.Termios.Attributes.get(fd: stream.rawValue)
                 let raw = original.withRaw()
                 try ISO_9945.Kernel.Termios.Attributes.set(raw, fd: stream.rawValue)
-                return Token(stream: stream, previous: .posix(original))
+                return Token(stream: stream, previous: original)
             } catch {
                 throw Terminal.Error(operation: .enterRaw, underlying: .kernel(error))
             }
@@ -55,11 +53,8 @@ extension Terminal.Mode.Raw.Token {
 
         public mutating func restore() throws(Terminal.Error) {
             guard !restored else { return }
-            guard case .posix(let attrs) = previous else {
-                throw Terminal.Error(operation: .exitRaw, underlying: .unsupported)
-            }
             do throws(Error::Error) {
-                try ISO_9945.Kernel.Termios.Attributes.set(attrs, fd: stream.rawValue)
+                try ISO_9945.Kernel.Termios.Attributes.set(previous, fd: stream.rawValue)
                 restored = true
             } catch let error {
                 throw Terminal.Error(operation: .exitRaw, underlying: .kernel(error))

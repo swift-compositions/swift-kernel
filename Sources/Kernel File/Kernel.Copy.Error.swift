@@ -1,3 +1,5 @@
+public import Error
+
 extension Kernel.Copy {
 
     public enum Error: Swift.Error, Sendable, Equatable, Hashable {
@@ -17,6 +19,8 @@ extension Kernel.Copy {
         case exists
 
         case notFound
+
+        case platform(code: Error::Error.Code)
     }
 }
 
@@ -31,6 +35,7 @@ extension Kernel.Copy.Error: CustomStringConvertible {
         case .permissionDenied: return "permission denied"
         case .exists: return "destination already exists"
         case .notFound: return "source not found"
+        case .platform(let code): return "platform error \(code)"
         }
     }
 }

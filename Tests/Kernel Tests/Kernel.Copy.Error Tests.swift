@@ -226,11 +226,41 @@ extension Kernel.Copy.Error.Test.EdgeCase {
         }
 
         @Test
-        func `unknown error maps to unsupported`() {
+        func `unknown error is passed through as a platform error`() {
 
             let error = Kernel.Copy.Error(posixErrno: 999)
-            #expect(error == .unsupported)
+            #expect(error == .platform(code: .posix(999)))
         }
     }
 
+#endif
+
+#if canImport(Darwin) || canImport(Glibc) || canImport(Musl)
+    #if canImport(Darwin)
+        import Darwin
+    #elseif canImport(Glibc)
+        import Glibc
+    #elseif canImport(Musl)
+        import Musl
+    #endif
+
+    extension Kernel.Copy.Error.Test.EdgeCase {
+        @Test
+        func `EINTR from copy_file_range(2) is passed through as a platform error, not unsupported`() {
+            #expect(Kernel.Copy.Error(posixErrno: EINTR) == .platform(code: .posix(EINTR)))
+        }
+
+        @Test
+        func `EDQUOT, ELOOP and ENAMETOOLONG are passed through as platform errors per POSIX.1-2024 errno`() {
+            for value in [EDQUOT, ELOOP, ENAMETOOLONG] {
+                #expect(Kernel.Copy.Error(posixErrno: value) == .platform(code: .posix(value)))
+            }
+        }
+
+        @Test
+        func `EINVAL and ENOTSUP still mean the copy mechanism is unsupported`() {
+            #expect(Kernel.Copy.Error(posixErrno: EINVAL) == .unsupported)
+            #expect(Kernel.Copy.Error(posixErrno: ENOTSUP) == .unsupported)
+        }
+    }
 #endif

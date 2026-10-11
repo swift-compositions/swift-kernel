@@ -1,59 +1,63 @@
-extension Kernel.File.Handle {
+#if os(Windows)
 
-    public init(
-        descriptor: consuming Kernel.Descriptor,
-        mode direct: Kernel.File.Direct.Mode.Resolved,
-        requirements: Kernel.File.Direct.Requirements
-    ) {
+    extension Kernel.File.Handle {
 
-        switch requirements {
-        case .known(let alignment):
-            self.init(
-                descriptor: descriptor,
-                direct: {
-                    switch direct {
-                    case .direct: .direct
+        public init(
+            descriptor: consuming Kernel.Descriptor,
+            mode direct: Kernel.File.Direct.Mode.Resolved,
+            requirements: Kernel.File.Direct.Requirements
+        ) {
 
-                    case .uncached: .uncached
+            switch requirements {
+            case .known(let alignment):
+                self.init(
+                    descriptor: descriptor,
+                    direct: {
+                        switch direct {
+                        case .direct: .direct
 
-                    case .buffered: .buffered
-                    }
-                }(),
-                requirements: .known(
-                    .init(
-                        bufferAlignment: alignment.bufferAlignment,
-                        offsetAlignment: alignment.offsetAlignment,
-                        lengthMultiple: alignment.lengthMultiple
+                        case .uncached: .uncached
+
+                        case .buffered: .buffered
+                        }
+                    }(),
+                    requirements: .known(
+                        .init(
+                            bufferAlignment: alignment.bufferAlignment,
+                            offsetAlignment: alignment.offsetAlignment,
+                            lengthMultiple: alignment.lengthMultiple
+                        )
                     )
                 )
-            )
 
-        case .unknown(let reason):
-            self.init(
-                descriptor: descriptor,
-                direct: {
-                    switch direct {
-                    case .direct: .direct
+            case .unknown(let reason):
+                self.init(
+                    descriptor: descriptor,
+                    direct: {
+                        switch direct {
+                        case .direct: .direct
 
-                    case .uncached: .uncached
+                        case .uncached: .uncached
 
-                    case .buffered: .buffered
-                    }
-                }(),
-                requirements: .unknown(
-                    reason: {
-                        switch reason {
-                        case .platformUnsupported: .platformUnsupported
-
-                        case .sectorSizeUndetermined: .sectorSizeUndetermined
-
-                        case .filesystemUnsupported: .filesystemUnsupported
-
-                        case .invalidHandle: .invalidHandle
+                        case .buffered: .buffered
                         }
-                    }()
+                    }(),
+                    requirements: .unknown(
+                        reason: {
+                            switch reason {
+                            case .platformUnsupported: .platformUnsupported
+
+                            case .sectorSizeUndetermined: .sectorSizeUndetermined
+
+                            case .filesystemUnsupported: .filesystemUnsupported
+
+                            case .invalidHandle: .invalidHandle
+                            }
+                        }()
+                    )
                 )
-            )
+            }
         }
     }
-}
+
+#endif

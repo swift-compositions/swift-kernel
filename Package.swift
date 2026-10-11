@@ -154,6 +154,7 @@ let package = Package(
             url: "https://github.com/swift-atoms/swift-terminal.git",
             branch: "main", traits: ["Error", "Input"]),
         .package(url: "https://github.com/swift-atoms/swift-cpu.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-either.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-posix.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-darwin.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-linux.git", branch: "main"),
@@ -256,6 +257,7 @@ let package = Package(
             name: "Kernel File",
             dependencies: [
                 "Kernel Core",
+                .product(name: "Either", package: "swift-either"),
                 .product(name: "String", package: "swift-string"),
                 .product(name: "Error", package: "swift-error"),
                 .product(name: "Memory", package: "swift-memory"),

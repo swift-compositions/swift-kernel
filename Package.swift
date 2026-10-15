@@ -177,7 +177,7 @@ let package = Package(
                 .product(name: "Error", package: "swift-error"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Random", package: "swift-random"),
-                .product(name: "System", package: "swift-system"),
+                .product(name: "System Primitives", package: "swift-system"),
                 .product(name: "Path", package: "swift-path"),
                 .product(name: "Reference", package: "swift-reference"),
                 .product(name: "Ownership", package: "swift-ownership"),
@@ -234,7 +234,7 @@ let package = Package(
         .target(
             name: "Kernel System",
             dependencies: ["Kernel Core",
-                .product(name: "System", package: "swift-system"),
+                .product(name: "System Primitives", package: "swift-system"),
             ]
         ),
 
@@ -444,7 +444,7 @@ let package = Package(
                     name: "Tagged",
                     package: "swift-tagged"
                 ),
-                .product(name: "System", package: "swift-system"),
+                .product(name: "System Primitives", package: "swift-system"),
                 .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
             ],
             path: "Tests/Kernel Tests"

@@ -1,8 +1,8 @@
 #if os(Linux)
     internal import Linux_Kernel_System_Standard
-    internal import System
+    internal import System_Primitives
 #elseif os(Windows)
-    internal import System
+    internal import System_Primitives
     internal import Windows_32_Kernel_System
     internal import Windows_32_Kernel_Thread
 #endif

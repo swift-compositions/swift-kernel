@@ -11,7 +11,7 @@
 @_exported public import Queue
 @_exported public import Random
 @_exported public import Reference
-@_exported public import System
+@_exported public import System_Primitives
 @_exported public import Tagged
 @_exported public import Time
 

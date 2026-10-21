@@ -56,7 +56,6 @@
 
                 final class Shared {
 
-                    // swift-format-ignore: UseShorthandTypeNames
                     typealias Registry = Dictionary::Dictionary<
                         Kernel.Event.ID, Registration
                     >

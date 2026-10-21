@@ -22,8 +22,7 @@
 
             package let _arm: (Kernel.Event.ID, Kernel.Event.Interest) throws(Error) -> Void
 
-            package let _poll:
-                (Clock.Continuous.Deadline?, inout [Kernel.Event]) throws(Error) -> Int
+            package let _poll: (Clock.Continuous.Deadline?, inout [Kernel.Event]) throws(Error) -> Int
 
             package let _close: () -> Void
 
@@ -57,6 +56,7 @@
 
                 final class Shared {
 
+                    // swift-format-ignore: UseShorthandTypeNames
                     typealias Registry = Dictionary::Dictionary<
                         Kernel.Event.ID, Registration
                     >
@@ -78,9 +78,12 @@
                     try add(descriptor, id, interest)
 
                     var box: Kernel.Descriptor? = consume descriptor
+                    guard let owned = box.take() else {
+                        preconditionFailure("The descriptor box was just filled")
+                    }
                     shared.registry.insert(
                         key: id,
-                        value: Registration(descriptor: box.take()!, interest: interest)
+                        value: Registration(descriptor: owned, interest: interest)
                     )
 
                     return id

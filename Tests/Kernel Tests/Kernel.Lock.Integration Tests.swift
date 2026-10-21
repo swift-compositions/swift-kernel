@@ -4,7 +4,6 @@ import Testing
 
 @testable import Kernel
 
-
 @Suite
 struct `Kernel.Lock Integration` {}
 

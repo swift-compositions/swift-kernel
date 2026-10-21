@@ -50,9 +50,8 @@ extension Kernel.File.Copy {
         do throws(Kernel.File.Stats.Error) {
             if followSymlinks {
                 return try Kernel.File.Stats.get(path: source)
-            } else {
-                return try Kernel.File.Stats.lget(path: source)
             }
+            return try Kernel.File.Stats.lget(path: source)
         } catch let error {
 
             #if os(Windows)

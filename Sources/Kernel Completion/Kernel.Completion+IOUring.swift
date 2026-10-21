@@ -229,12 +229,18 @@
         ) -> Kernel.Completion.Event.Count {
             let l1Count = uring.drain(limit: cqCapacity) { cqe in
 
-                let rawResult: Int32 =
-                    if cqe.isSuccess {
-                        Int32(cqe.bytes.transferred!)
-                    } else {
-                        -cqe.errorCode!.posix!
+                let rawResult: Int32
+                if cqe.isSuccess {
+                    guard let transferred = cqe.bytes.transferred else {
+                        preconditionFailure("A successful completion carries a transferred byte count")
                     }
+                    rawResult = Int32(transferred)
+                } else {
+                    guard let posix = cqe.errorCode?.posix else {
+                        preconditionFailure("A failed completion carries a POSIX error code")
+                    }
+                    rawResult = -posix
+                }
 
                 visitor(
                     Kernel.Completion.Event(

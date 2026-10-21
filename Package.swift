@@ -145,14 +145,18 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-storage.git",
-            branch: "main", traits: ["Generational", "Memory"]),
+            branch: "main",
+            traits: ["Generational", "Memory"]
+        ),
         .package(
             url: "https://github.com/swift-molecules/swift-memory-allocation.git",
             branch: "main"
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-terminal.git",
-            branch: "main", traits: ["Error", "Input"]),
+            branch: "main",
+            traits: ["Error", "Input"]
+        ),
         .package(url: "https://github.com/swift-atoms/swift-cpu.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-either.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-posix.git", branch: "main"),
@@ -233,7 +237,8 @@ let package = Package(
 
         .target(
             name: "Kernel System",
-            dependencies: ["Kernel Core",
+            dependencies: [
+                "Kernel Core",
                 .product(name: "System Primitives", package: "swift-system"),
             ]
         ),

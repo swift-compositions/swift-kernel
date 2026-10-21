@@ -4,9 +4,9 @@ extension Toolchain {
 
     public static var hasTaggedMetadataSIGSEGV: Bool {
         #if compiler(<6.4)
-        return true
+            return true
         #else
-        return false
+            return false
         #endif
     }
 }

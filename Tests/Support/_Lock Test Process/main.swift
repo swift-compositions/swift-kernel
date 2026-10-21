@@ -249,10 +249,9 @@ func printUsage() {
                 if case .try = acquire {
                     writeStdout("WOULD_BLOCK\n")
                     return 1
-                } else {
-                    writeStdout("TIMED_OUT\n")
-                    return 2
                 }
+                writeStdout("TIMED_OUT\n")
+                return 2
 
             case .timedOut:
 
@@ -359,10 +358,9 @@ func printUsage() {
                 if case .try = acquire {
                     writeStdout("WOULD_BLOCK\n")
                     return 1
-                } else {
-                    writeStdout("TIMED_OUT\n")
-                    return 2
                 }
+                writeStdout("TIMED_OUT\n")
+                return 2
 
             case .timedOut:
 

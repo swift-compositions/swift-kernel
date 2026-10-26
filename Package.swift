@@ -91,7 +91,7 @@ let package = Package(
             traits: ["Coder", "Parser", "Serializer"]
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-spatial.git",
+            url: "https://github.com/swift-atoms/swift-space.git",
             branch: "main"
         ),
         .package(
@@ -185,7 +185,7 @@ let package = Package(
                 .product(name: "Path", package: "swift-path"),
                 .product(name: "Reference", package: "swift-reference"),
                 .product(name: "Ownership", package: "swift-ownership"),
-                .product(name: "Space", package: "swift-spatial"),
+                .product(name: "Space", package: "swift-space"),
                 .product(name: "Queue", package: "swift-queue"),
                 .product(
                     name: "POSIX Kernel",

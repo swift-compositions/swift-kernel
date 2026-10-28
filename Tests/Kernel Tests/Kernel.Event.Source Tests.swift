@@ -72,6 +72,85 @@ import Testing
         }
     }
 
+    extension Kernel.Event.Source.Test.Integration {
+        @Test func `vnode interest reports a change when a file appears in a watched directory`()
+            throws
+        {
+            let directory = Kernel.Temporary.filePath(prefix: "vnode")
+            try Path.scope(directory) { path in
+                try Kernel.Directory.Create.create(path)
+                defer { try? Kernel.Directory.Remove.remove(path) }
+
+                let watched = try Kernel.File.Open.open(
+                    path: path,
+                    mode: .read,
+                    options: [.eventOnly, .execClose],
+                    permissions: Kernel.File.Permissions(rawValue: 0)
+                )
+                let source = try Kernel.Event.Source.kqueue()
+                let id = try source.register(descriptor: watched, interest: [.change, .delete])
+                try source.arm(id: id, interest: [.change, .delete])
+
+                try Path.scope(directory + "/new") { file in
+                    let created = try Kernel.File.Open.open(
+                        path: file,
+                        mode: .write,
+                        options: [.create],
+                        permissions: .ownerReadWrite
+                    )
+                    Kernel.Event.Test.closeNoThrow(created)
+
+                    let deadline = Clock.Continuous.Deadline.after(.seconds(2), from: Clock.Continuous.now)
+                    var events = [Kernel.Event](repeating: .empty, count: 4)
+                    let count = try source.poll(deadline: deadline, into: &events)
+
+                    #expect(count == 1)
+                    #expect(events[0].id == id)
+                    #expect(events[0].interest == .change)
+
+                    try Kernel.File.Delete.delete(file)
+                }
+
+                source.close()
+            }
+        }
+
+        @Test func `vnode interest reports the deletion of the watched directory`() throws {
+            let directory = Kernel.Temporary.filePath(prefix: "vnode")
+            try Path.scope(directory) { path in
+                try Kernel.Directory.Create.create(path)
+
+                let watched = try Kernel.File.Open.open(
+                    path: path,
+                    mode: .read,
+                    options: [.eventOnly, .execClose],
+                    permissions: Kernel.File.Permissions(rawValue: 0)
+                )
+                let source = try Kernel.Event.Source.kqueue()
+                let id = try source.register(descriptor: watched, interest: [.change])
+                try source.modify(id: id, interest: [.change, .rename, .delete])
+                try source.arm(id: id, interest: [.change, .rename, .delete])
+
+                try Kernel.Directory.Remove.remove(path)
+
+                let deadline = Clock.Continuous.Deadline.after(.seconds(2), from: Clock.Continuous.now)
+                var events = [Kernel.Event](repeating: .empty, count: 4)
+                let count = try source.poll(deadline: deadline, into: &events)
+
+                #expect(count == 1)
+                #expect(events[0].id == id)
+                #expect(events[0].interest.contains(.delete))
+
+                source.close()
+            }
+        }
+
+        @Test func `vnode interests describe themselves`() {
+            #expect(Kernel.Event.Interest.vnode.description == "change|attributes|rename|delete|revoke")
+            #expect(Kernel.Event.Interest([.read, .change]).description == "read|change")
+        }
+    }
+
 #elseif os(Linux)
 
     extension Kernel.Event.Source.Test.Integration {

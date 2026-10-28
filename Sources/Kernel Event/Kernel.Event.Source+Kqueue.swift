@@ -46,7 +46,47 @@
                     )
                 }
 
+                if let notes = Kernel.Kqueue.Filter.Flags(interest.intersection(.vnode)) {
+                    events.append(
+                        Kernel.Kqueue.Event(
+                            id: Kernel.Event.ID(descriptor: fd).retag(),
+                            filter: .vnode,
+                            flags: flags,
+                            fflags: notes,
+                            data: id.map { UInt64($0) }.retag(Kernel.Kqueue.Event.self)
+                        )
+                    )
+                }
+
                 return events
+            }
+        }
+
+        extension Kernel.Kqueue.Filter.Flags {
+
+            /// The vnode notes for an interest, or nil when it names none.
+            fileprivate init?(_ interest: Kernel.Event.Interest) {
+                var notes: Self = .none
+                if interest.contains(.change) { notes = notes | .write | .extend }
+                if interest.contains(.attributes) { notes = notes | .attrib | .link }
+                if interest.contains(.rename) { notes = notes | .rename }
+                if interest.contains(.delete) { notes = notes | .delete }
+                if interest.contains(.revoke) { notes = notes | .revoke }
+                guard notes != .none else { return nil }
+                self = notes
+            }
+        }
+
+        extension Kernel.Event.Interest {
+
+            /// The vnode interests a fired event's notes report.
+            fileprivate init(_ notes: Kernel.Kqueue.Filter.Flags) {
+                self = []
+                if notes.contains(.write) || notes.contains(.extend) { insert(.change) }
+                if notes.contains(.attrib) || notes.contains(.link) { insert(.attributes) }
+                if notes.contains(.rename) { insert(.rename) }
+                if notes.contains(.delete) { insert(.delete) }
+                if notes.contains(.revoke) { insert(.revoke) }
             }
         }
 
@@ -112,8 +152,17 @@
                             new: Kernel.Event.Interest
                         ) throws(Kernel.Event.Driver.Error) in
 
-                        let toRemove = old.subtracting(new)
-                        let toAdd = new.subtracting(old)
+                        // Read and write are one filter each; every vnode interest shares the one
+                        // vnode filter, so a change to its notes re-adds it with the full new set.
+                        var toRemove = old.subtracting(new).subtracting(.vnode)
+                        var toAdd = new.subtracting(old).subtracting(.vnode)
+                        if old.intersection(.vnode) != new.intersection(.vnode) {
+                            if new.isDisjoint(with: .vnode) {
+                                toRemove.formUnion(old.intersection(.vnode))
+                            } else {
+                                toAdd.formUnion(new.intersection(.vnode))
+                            }
+                        }
                         var events = kevents(fd: fd, id: id, interest: toRemove, flags: .delete)
                         events.append(
                             contentsOf: kevents(fd: fd, id: id, interest: toAdd, flags: addFlags)
@@ -200,6 +249,7 @@
                             var interest: Kernel.Event.Interest = []
                             if raw.filter == .read { interest.insert(.read) }
                             if raw.filter == .write { interest.insert(.write) }
+                            if raw.filter == .vnode { interest.formUnion(Kernel.Event.Interest(raw.fflags)) }
 
                             var flags: Kernel.Event.Options = []
                             if raw.flags.contains(.eof) {

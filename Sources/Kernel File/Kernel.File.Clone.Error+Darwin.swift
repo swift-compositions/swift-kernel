@@ -1,6 +1,6 @@
 #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
-    internal import Darwin_Kernel_Standard
+    internal import Darwin_Kernel
 
     extension Kernel.File.Clone.Error {
 

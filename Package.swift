@@ -253,6 +253,11 @@ let package = Package(
                 "Kernel System",
                 .product(name: "Error", package: "swift-error"),
                 .product(
+                    name: "Linux Kernel System",
+                    package: "swift-linux",
+                    condition: .when(platforms: [.linux])
+                ),
+                .product(
                     name: "Windows Kernel Thread",
                     package: "swift-windows",
                     condition: .when(platforms: [.windows])
@@ -270,6 +275,16 @@ let package = Package(
                 .product(name: "Error", package: "swift-error"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Path", package: "swift-path"),
+                .product(
+                    name: "Darwin Kernel",
+                    package: "swift-darwin",
+                    condition: .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS])
+                ),
+                .product(
+                    name: "Linux Kernel File",
+                    package: "swift-linux",
+                    condition: .when(platforms: [.linux])
+                ),
                 .product(
                     name: "Windows Kernel File",
                     package: "swift-windows",
@@ -304,6 +319,11 @@ let package = Package(
                     name: "POSIX Kernel Descriptor",
                     package: "swift-posix",
                     condition: .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS, .linux])
+                ),
+                .product(
+                    name: "Darwin Kernel",
+                    package: "swift-darwin",
+                    condition: .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS])
                 ),
                 .product(
                     name: "Linux Kernel Event",

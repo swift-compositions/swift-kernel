@@ -1,7 +1,7 @@
 #if !os(Windows)
     #if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS)
 
-        import Darwin_Kernel_Event_Standard
+        import Darwin_Kernel
 
         public import POSIX_Kernel_Descriptor
 

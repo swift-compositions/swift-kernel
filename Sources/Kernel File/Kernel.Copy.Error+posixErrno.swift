@@ -1,39 +1,31 @@
 #if canImport(Darwin) || canImport(Glibc) || canImport(Musl)
 
-    #if canImport(Darwin)
-        internal import Darwin
-    #elseif canImport(Glibc)
-        internal import Glibc
-    #elseif canImport(Musl)
-        internal import Musl
-    #endif
-
     extension Kernel.Copy.Error {
 
         public init(posixErrno: Int32) {
-            switch posixErrno {
-            case EBADF:
+            switch Error::Error.Code.posix(posixErrno) {
+            case .EBADF:
                 self = .invalidDescriptor
 
-            case EXDEV:
+            case .EXDEV:
                 self = .crossDevice
 
-            case ENOSPC:
+            case .ENOSPC:
                 self = .noSpace
 
-            case EIO:
+            case .EIO:
                 self = .io
 
-            case EACCES, EPERM:
+            case .EACCES, .EPERM:
                 self = .permissionDenied
 
-            case ENOENT:
+            case .ENOENT:
                 self = .notFound
 
-            case EEXIST:
+            case .EEXIST:
                 self = .exists
 
-            case EINVAL, ENOTSUP, EOPNOTSUPP, ENOSYS:
+            case .EINVAL, .ENOTSUP, .EOPNOTSUPP, .ENOSYS:
                 self = .unsupported
 
             default:

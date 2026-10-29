@@ -1,5 +1,5 @@
 #if os(Linux)
-    internal import Linux_Kernel_System_Standard
+    internal import Linux_Kernel_System
     internal import System_Primitives
 #elseif os(Windows)
     internal import System_Primitives

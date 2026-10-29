@@ -1,6 +1,6 @@
 #if os(Linux)
 
-    internal import Linux_Kernel_File_Standard
+    internal import Linux_Kernel_File
 
     extension Kernel.File.Clone.Error {
 

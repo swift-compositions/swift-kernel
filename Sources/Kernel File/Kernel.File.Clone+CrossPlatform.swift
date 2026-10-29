@@ -1,9 +1,9 @@
 public import Path
 
 #if os(macOS)
-    internal import Darwin_Kernel_Standard
+    internal import Darwin_Kernel
 #elseif os(Linux)
-    internal import Linux_Kernel_File_Standard
+    internal import Linux_Kernel_File
 #endif
 
 #if os(Windows)

@@ -58,7 +58,7 @@ let package = Package(
         ),
     ],
     traits: [
-        .trait(name: "KernelTerminal", description: "Kernel Terminal and the dependencies only it needs"),
+        .trait(name: "KernelTerminal", description: "Kernel Terminal and the dependencies only it needs")
     ],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-serializer.git", branch: "main", traits: ["Either", "Map", "Pair", "Repetition", "Always", "Byte"]),

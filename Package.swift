@@ -57,6 +57,9 @@ let package = Package(
             targets: ["Kernel Test Support"]
         ),
     ],
+    traits: [
+        .trait(name: "KernelTerminal", description: "Kernel Terminal and the dependencies only it needs"),
+    ],
     dependencies: [
         .package(url: "https://github.com/swift-atoms/swift-serializer.git", branch: "main", traits: ["Either", "Map", "Pair", "Repetition", "Always", "Byte"]),
         .package(url: "https://github.com/swift-atoms/swift-parser.git", branch: "main", traits: ["Map", "IteratorLeaves", "Product", "Skip", "Append", "Either", "Iterator"]),
@@ -165,9 +168,6 @@ let package = Package(
         .package(url: "https://github.com/swift-compositions/swift-windows.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-strings.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-standard-library-extensions.git", branch: "main"),
-    ],
-    traits: [
-        .trait(name: "KernelTerminal", description: "Kernel Terminal and the dependencies only it needs"),
     ],
     targets: [
 

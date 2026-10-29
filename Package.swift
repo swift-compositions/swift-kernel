@@ -166,6 +166,9 @@ let package = Package(
         .package(url: "https://github.com/swift-compositions/swift-strings.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-standard-library-extensions.git", branch: "main"),
     ],
+    traits: [
+        .trait(name: "KernelTerminal", description: "Kernel Terminal and the dependencies only it needs"),
+    ],
     targets: [
 
         .target(
@@ -350,7 +353,7 @@ let package = Package(
             name: "Kernel Terminal",
             dependencies: [
                 "Kernel Core",
-                .product(name: "Terminal", package: "swift-terminal"),
+                .product(name: "Terminal", package: "swift-terminal", condition: .when(traits: ["KernelTerminal"])),
                 .product(
                     name: "POSIX Kernel Terminal",
                     package: "swift-posix",

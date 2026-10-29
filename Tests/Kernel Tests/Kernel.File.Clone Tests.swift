@@ -342,6 +342,49 @@ extension Kernel.File.Clone.Test.Unit {
             )
         }
 
+        // A dangling symlink is an entry `stat` cannot see, standing in for a
+        // file that appears after a check: only an exclusive create refuses it
+        // instead of writing through the link.
+        @Test(arguments: [Kernel.File.Clone.Behavior.copyOnly, .reflinkOrCopy])
+        func `clone refuses a dangling symlink at the destination`(
+            behavior: Kernel.File.Clone.Behavior
+        ) throws {
+            let source = createTempFile(prefix: "clone-src", content: "Source content")
+            let missing = "/tmp/clone-missing-\(getpid())-\(Int.random(in: 0..<Int.max))"
+            let dest = "/tmp/clone-dst-\(getpid())-\(Int.random(in: 0..<Int.max))"
+            #expect(symlink(missing, dest) == 0)
+
+            defer {
+                cleanup(source)
+                cleanup(dest)
+                cleanup(missing)
+            }
+
+            typealias E = Path.String.Error<Kernel.File.Clone.Error>
+
+            expectThrows(
+                { (error: E) in
+                    #expect(error.body == .destinationExists)
+                },
+                { () throws(E) in
+                    _ = try Path.scope(source, dest) {
+                        srcPath,
+                        dstPath throws(Kernel.File.Clone.Error) in
+                        try Kernel.File.Clone.clone(
+                            from: srcPath,
+                            to: dstPath,
+                            behavior: behavior
+                        )
+                    }
+                }
+            )
+
+            var statBuf = stat()
+            #expect(missing.withCString { lstat($0, &statBuf) } != 0)
+            #expect(dest.withCString { lstat($0, &statBuf) } == 0)
+            #expect((statBuf.st_mode & S_IFMT) == S_IFLNK)
+        }
+
         @Test
         func `clone from nonexistent source fails`() {
             let source = "/tmp/nonexistent-\(getpid())"

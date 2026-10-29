@@ -80,6 +80,12 @@ extension Kernel.File.Copy {
         overwrite: Bool
     ) throws(Kernel.File.Copy.Error) {
 
+        // Without overwrite the destination is left alone: the copy creates it
+        // exclusively and refuses with `.destinationExists` if it is there.
+        guard overwrite else {
+            return
+        }
+
         let destStats: Kernel.File.Stats?
         do throws(Kernel.File.Stats.Error) {
             destStats = try Kernel.File.Stats.lget(path: destination)
@@ -90,10 +96,6 @@ extension Kernel.File.Copy {
 
         guard let stats = destStats else {
             return
-        }
-
-        if !overwrite {
-            throw .destinationExists
         }
 
         if stats.type == .directory {
@@ -161,6 +163,9 @@ extension Kernel.File.Copy {
                 try Kernel.Link.Symbolic.create(target: targetView, at: destination)
             }
         } catch {
+            if let error = error as? Kernel.Link.Symbolic.Error, error == .exists {
+                throw .destinationExists
+            }
             throw .operation("symlink create failed: \(error)")
         }
     }

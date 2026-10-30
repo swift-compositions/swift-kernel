@@ -158,7 +158,10 @@ let package = Package(
         .package(
             url: "https://github.com/swift-atoms/swift-terminal.git",
             branch: "main",
-            traits: ["Error", "Input"]
+            traits: [
+                .trait(name: "Error", condition: .when(traits: ["KernelTerminal"])),
+                .trait(name: "Input", condition: .when(traits: ["KernelTerminal"])),
+            ]
         ),
         .package(url: "https://github.com/swift-atoms/swift-cpu.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-either.git", branch: "main"),

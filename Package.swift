@@ -68,10 +68,6 @@ let package = Package(
             branch: "main"
         ),
         .package(
-            url: "https://github.com/swift-atoms/swift-system.git",
-            branch: "main"
-        ),
-        .package(
             url: "https://github.com/swift-atoms/swift-binary.git",
             branch: "main",
             traits: ["Serializer"]
@@ -187,7 +183,6 @@ let package = Package(
                 .product(name: "Error", package: "swift-error"),
                 .product(name: "Memory", package: "swift-memory"),
                 .product(name: "Random", package: "swift-random"),
-                .product(name: "System Primitives", package: "swift-system"),
                 .product(name: "Path", package: "swift-path"),
                 .product(name: "Reference", package: "swift-reference"),
                 .product(name: "Ownership", package: "swift-ownership"),
@@ -245,7 +240,11 @@ let package = Package(
             name: "Kernel System",
             dependencies: [
                 "Kernel Core",
-                .product(name: "System Primitives", package: "swift-system"),
+                .product(
+                    name: "POSIX Kernel System",
+                    package: "swift-posix",
+                    condition: .when(platforms: [.macOS, .iOS, .tvOS, .watchOS, .visionOS, .linux])
+                ),
             ]
         ),
 
@@ -475,7 +474,6 @@ let package = Package(
                     name: "Tagged",
                     package: "swift-tagged"
                 ),
-                .product(name: "System Primitives", package: "swift-system"),
                 .product(name: "Standard Library Extensions", package: "swift-standard-library-extensions"),
             ],
             path: "Tests/Kernel Tests"

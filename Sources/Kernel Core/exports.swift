@@ -11,7 +11,6 @@
 @_exported public import Random
 @_exported public import Reference
 @_exported public import Space
-@_exported public import System_Primitives
 @_exported public import Tagged
 @_exported public import Time
 

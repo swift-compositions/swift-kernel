@@ -1,8 +1,6 @@
 #if os(Linux)
     internal import Linux_Kernel_System
-    internal import System_Primitives
 #elseif os(Windows)
-    internal import System_Primitives
     internal import Windows_32_Kernel_System
     internal import Windows_32_Kernel_Thread
 #endif
@@ -78,12 +76,12 @@ extension Kernel.Thread.Affinity {
         of node: Int
     ) throws(Kernel.Thread.Affinity.Error) -> Set<Int> {
         #if os(Linux) || os(Windows)
-            guard case .nonUniform(let nodes) = System.Topology.NUMA.discover(),
-                let match = nodes.first(where: { $0.id == node })
+            guard case .nonUniform(let nodes) = CPU.NUMA.state,
+                let match = nodes.first(where: { Int(bitPattern: $0.id.underlying.rawValue) == node })
             else {
                 throw .invalidNode(node)
             }
-            return match.cpus
+            return Set(match.processors.map(Int.init))
 
         #else
             throw .unsupported

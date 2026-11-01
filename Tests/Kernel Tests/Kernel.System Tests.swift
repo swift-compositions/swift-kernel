@@ -9,27 +9,21 @@ enum SystemMemoryTests {
     }
 }
 
-#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS) || os(Linux)
+#if os(macOS) || os(iOS) || os(tvOS) || os(watchOS) || os(visionOS) || os(Linux) || os(Windows)
 
     extension SystemMemoryTests.Test.Unit {
-        @Test func `total memory is positive`() {
-            let total = System.memoryCapacity
-            let bytes = UInt64(total.rawValue)
-            #expect(bytes > 0)
+        @Test func `installed memory exceeds 64 MiB`() {
+            #expect(Int(Memory.Physical.capacity) >= 64 * 1024 * 1024)
         }
 
-        @Test func `total memory exceeds minimum threshold`() {
-            let total = System.memoryCapacity
-            let bytes = UInt64(total.rawValue)
-            let sixtyFourMB: UInt64 = 64 * 1024 * 1024
-            #expect(bytes >= sixtyFourMB)
+        @Test func `installed memory is within 128 TiB`() {
+            #expect(UInt64(Int(Memory.Physical.capacity)) <= 128 * 1024 * 1024 * 1024 * 1024)
         }
 
-        @Test func `total memory is within reasonable upper bound`() {
-            let total = System.memoryCapacity
-            let bytes = UInt64(total.rawValue)
-            let oneHundredTwentyEightTB: UInt64 = 128 * 1024 * 1024 * 1024 * 1024
-            #expect(bytes <= oneHundredTwentyEightTB)
+        @Test func `page size is a power of two`() {
+            let size = Int(Memory.Page.size)
+            #expect(size >= 4096)
+            #expect(size & (size - 1) == 0)
         }
     }
 
@@ -42,41 +36,42 @@ enum SystemProcessorTests {
 }
 
 extension SystemProcessorTests.Test.Unit {
-    @Test func `logical processor count is positive`() {
-        let count = System.processorCount
-        let value = Int(count)
+    @Test func `logical count is between 1 and 4096`() {
+        let value = Int(CPU.Logical.count)
         #expect(value > 0)
+        #expect(value <= 4096)
     }
 
-    @Test func `logical processor count is within reasonable upper bound`() {
-        let count = System.processorCount
-        let value = Int(count)
-        #expect(value <= 4096)
+    @Test func `core count is between 1 and the logical count`() {
+        let cores = Int(CPU.Core.count)
+        #expect(cores > 0)
+        #expect(cores <= Int(CPU.Logical.count))
+    }
+
+    @Test func `NUMA nodes each hold processors`() {
+        if case .nonUniform(let nodes) = CPU.NUMA.state {
+            for node in nodes {
+                #expect(!node.processors.isEmpty)
+            }
+        }
     }
 }
 
-enum SystemPhysicalProcessorTests {
+enum SystemNameTests {
     @Suite struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension SystemPhysicalProcessorTests.Test.Unit {
-    @Test func `physical processor count is positive`() {
-        let count = System.physicalProcessorCount
-        let value = Int(count)
-        #expect(value > 0)
+extension SystemNameTests.Test.Unit {
+    @Test func `name reports a system, release and machine`() throws {
+        let name = try #require(Kernel.Name.current)
+        #expect(!name.system.isEmpty)
+        #expect(!name.release.isEmpty)
+        #expect(!name.machine.isEmpty)
     }
 
-    @Test func `physical count does not exceed logical count`() {
-        let physical = Int(System.physicalProcessorCount)
-        let logical = Int(System.processorCount)
-        #expect(physical <= logical)
-    }
-
-    @Test func `physical processor count is within reasonable upper bound`() {
-        let count = System.physicalProcessorCount
-        let value = Int(count)
-        #expect(value <= 4096)
+    @Test func `thread sleep returns`() {
+        Kernel.Thread.sleep(.milliseconds(1))
     }
 }

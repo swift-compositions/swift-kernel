@@ -17,7 +17,7 @@ Use this package when you need operating system calls from Swift under one name 
 - On Darwin, end of file is reported as a hangup together with a read or write hangup for the filter that saw it. Linux reports a read hangup but never a write hangup.
 - `Kernel.Completion.platform()` is io_uring on Linux and fails on every other platform. `Kernel.Completion.submit(_:target:)` only queues, and fails when the queue is full. Nothing reaches the kernel until `Kernel.Completion.flush()`, which does not wait for completions. A read or write without an offset uses the file's current position.
 - A negative `Kernel.Completion.Event.Result` is the negated POSIX error code.
-- `Kernel.Thread.trap` works like `Kernel.Thread.spawn` but traps instead of throwing when the thread can't be created. `Kernel.Thread.Handle.joinChecked()` traps when called from the thread being joined. A `Kernel.Thread.Handle.Reference` must be joined exactly once and traps when joined twice or released unjoined.
+- `Kernel.Thread.trap` works like `Kernel.Thread.spawn` but traps instead of throwing when the thread can't be created. `Kernel.Thread.Handle.joinChecked()` traps when called from the thread being joined.
 - `Kernel.Thread.Affinity.apply(_:)` pins only on Linux and Windows. Elsewhere any affinity except `any` fails as unsupported. A NUMA node that the CPU doesn't report fails as an invalid node.
 - `Kernel.Lock.Acquire.timeout(_:)` turns the duration into a deadline on the continuous clock at the moment it is called.
 - `Terminal.Mode.Raw.Token.restore()` only restores once and does nothing after that. A token that is dropped without being restored leaves the terminal in raw mode.

@@ -158,12 +158,12 @@ extension Kernel.File.Copy {
             throw .operation("readlink failed: \(error)")
         }
 
-        do {
-            try Path.scope(target) { targetView in
+        do throws(Path.String.Error<Kernel.Link.Symbolic.Error>) {
+            try Path.scope(target) { targetView throws(Kernel.Link.Symbolic.Error) in
                 try Kernel.Link.Symbolic.create(target: targetView, at: destination)
             }
         } catch {
-            if let error = error as? Kernel.Link.Symbolic.Error, error == .exists {
+            if case .body(.exists) = error {
                 throw .destinationExists
             }
             throw .operation("symlink create failed: \(error)")

@@ -20,7 +20,7 @@ func writeStdout(_ message: Swift.String) {
             var written: DWORD = 0
             _ = WriteFile(GetStdHandle(DWORD(STD_OUTPUT_HANDLE)), ptr.baseAddress, DWORD(ptr.count), &written, nil)
         #else
-            _ = write(STDOUT_FILENO, ptr.baseAddress, ptr.count)
+            _ = unsafe write(STDOUT_FILENO, ptr.baseAddress, ptr.count)
         #endif
     }
 }
@@ -32,7 +32,7 @@ func writeStderr(_ message: Swift.String) {
             var written: DWORD = 0
             _ = WriteFile(GetStdHandle(DWORD(STD_ERROR_HANDLE)), ptr.baseAddress, DWORD(ptr.count), &written, nil)
         #else
-            _ = write(STDERR_FILENO, ptr.baseAddress, ptr.count)
+            _ = unsafe write(STDERR_FILENO, ptr.baseAddress, ptr.count)
         #endif
     }
 }
@@ -44,7 +44,7 @@ func readStdinByte() {
             var read: DWORD = 0
             _ = ReadFile(GetStdHandle(DWORD(STD_INPUT_HANDLE)), ptr.baseAddress, 1, &read, nil)
         #else
-            _ = read(STDIN_FILENO, ptr.baseAddress, 1)
+            _ = unsafe read(STDIN_FILENO, ptr.baseAddress, 1)
         #endif
     }
 }
@@ -198,7 +198,7 @@ func printUsage() {
             return 3
         }
 
-        let rawFd = open(args.filePath, O_RDWR)
+        let rawFd = unsafe open(args.filePath, O_RDWR)
         guard rawFd >= 0 else {
             writeStderr("Failed to open file: \(args.filePath)\n")
             return 3

@@ -239,7 +239,7 @@ let package = Package(
         .target(
             name: "Kernel System",
             dependencies: [
-                "Kernel Core",
+                .target(name: "Kernel Core"),
                 .product(
                     name: "POSIX Kernel System",
                     package: "swift-posix",
@@ -251,8 +251,8 @@ let package = Package(
         .target(
             name: "Kernel Thread",
             dependencies: [
-                "Kernel Core",
-                "Kernel System",
+                .target(name: "Kernel Core"),
+                .target(name: "Kernel System"),
                 .product(name: "Error", package: "swift-error"),
                 .product(
                     name: "Linux Kernel System",
@@ -271,7 +271,7 @@ let package = Package(
         .target(
             name: "Kernel File",
             dependencies: [
-                "Kernel Core",
+                .target(name: "Kernel Core"),
                 .product(name: "Either", package: "swift-either"),
                 .product(name: "String", package: "swift-string"),
                 .product(name: "Error", package: "swift-error"),
@@ -298,7 +298,7 @@ let package = Package(
         .target(
             name: "Kernel Event",
             dependencies: [
-                "Kernel Core",
+                .target(name: "Kernel Core"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Dictionary", package: "swift-dictionary"),
                 .product(name: "Hash Indexed Primitive", package: "swift-hash-table"),
@@ -338,9 +338,9 @@ let package = Package(
         .target(
             name: "Kernel Completion",
             dependencies: [
-                "Kernel Core",
+                .target(name: "Kernel Core"),
 
-                "Kernel Event",
+                .target(name: "Kernel Event"),
                 .product(
                     name: "Linux Kernel IO Uring",
                     package: "swift-linux",
@@ -374,7 +374,7 @@ let package = Package(
         .target(
             name: "Kernel Terminal",
             dependencies: [
-                "Kernel Core",
+                .target(name: "Kernel Core"),
                 .product(name: "Terminal", package: "swift-terminal", condition: .when(traits: ["KernelTerminal"])),
                 .product(
                     name: "POSIX Kernel Terminal",
@@ -387,13 +387,13 @@ let package = Package(
         .target(
             name: "Kernel",
             dependencies: [
-                "Kernel Core",
-                "Kernel System",
-                "Kernel Thread",
-                "Kernel File",
-                "Kernel Event",
-                "Kernel Completion",
-                "Kernel Clock",
+                .target(name: "Kernel Core"),
+                .target(name: "Kernel System"),
+                .target(name: "Kernel Thread"),
+                .target(name: "Kernel File"),
+                .target(name: "Kernel Event"),
+                .target(name: "Kernel Completion"),
+                .target(name: "Kernel Clock"),
                 .product(
                     name: "POSIX Kernel Descriptor",
                     package: "swift-posix",
@@ -440,7 +440,7 @@ let package = Package(
         .target(
             name: "Kernel Test Support",
             dependencies: [
-                "Kernel",
+                .target(name: "Kernel"),
                 .product(name: "Strings", package: "swift-strings"),
             ],
             path: "Tests/Support",
@@ -450,7 +450,7 @@ let package = Package(
         .executableTarget(
             name: "_Lock Test Process",
             dependencies: [
-                "Kernel",
+                .target(name: "Kernel"),
                 .product(name: "Binary", package: "swift-binary"),
                 .product(
                     name: "POSIX Kernel Descriptor",
@@ -463,13 +463,13 @@ let package = Package(
         .testTarget(
             name: "Kernel Tests",
             dependencies: [
-                "Kernel",
-                "Kernel Core",
-                "Kernel Thread",
-                "Kernel File",
-                "Kernel Event",
-                "Kernel Completion",
-                "Kernel Test Support",
+                .target(name: "Kernel"),
+                .target(name: "Kernel Core"),
+                .target(name: "Kernel Thread"),
+                .target(name: "Kernel File"),
+                .target(name: "Kernel Event"),
+                .target(name: "Kernel Completion"),
+                .target(name: "Kernel Test Support"),
                 .product(
                     name: "Tagged",
                     package: "swift-tagged"

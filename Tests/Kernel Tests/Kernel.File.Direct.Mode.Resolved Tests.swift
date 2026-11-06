@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Mode.Resolved {
+enum `Kernel.File.Direct.Mode.Resolved Tests` {}
+
+extension `Kernel.File.Direct.Mode.Resolved Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Mode.Resolved {
     }
 }
 
-extension Kernel.File.Direct.Mode.Resolved.Test.Unit {
+extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.Unit {
     @Test
     func `direct case exists`() {
         let resolved = Kernel.File.Direct.Mode.Resolved.direct
@@ -42,7 +44,7 @@ extension Kernel.File.Direct.Mode.Resolved.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Resolved.Test.Unit {
+extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.Unit {
     @Test
     func `Resolved is Sendable`() {
         let resolved: any Sendable = Kernel.File.Direct.Mode.Resolved.buffered
@@ -59,7 +61,7 @@ extension Kernel.File.Direct.Mode.Resolved.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Resolved.Test.EdgeCase {
+extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.EdgeCase {
     @Test
     func `all resolved modes are distinct`() {
         let cases: [Kernel.File.Direct.Mode.Resolved] = [

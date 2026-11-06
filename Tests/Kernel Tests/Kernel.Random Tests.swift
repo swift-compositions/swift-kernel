@@ -2,14 +2,16 @@ import Kernel
 import Standard_Library_Extensions
 import Testing
 
-extension Random {
+enum `Random Tests` {}
+
+extension `Random Tests` {
     @Suite
     struct Test {
         @Suite struct Fill {}
     }
 }
 
-extension Random.Test.Fill {
+extension `Random Tests`.Test.Fill {
     @Test
     func `fill(_:) on a 32-byte buffer produces non-zero bytes on every platform`() throws(Random
         .Error)

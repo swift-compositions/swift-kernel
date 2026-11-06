@@ -2,7 +2,9 @@ import Testing
 
 @_spi(Syscall) @testable import Kernel_Completion
 
-extension Kernel.Completion.Event.Result {
+enum `Kernel.Completion.Event.Result Tests` {}
+
+extension `Kernel.Completion.Event.Result Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.Completion.Event.Result {
     }
 }
 
-extension Kernel.Completion.Event.Result.Test.Unit {
+extension `Kernel.Completion.Event.Result Tests`.Test.Unit {
     @Test
     func `positive result is success`() {
         let result = Kernel.Completion.Event.Result(rawValue: 42)
@@ -54,7 +56,7 @@ extension Kernel.Completion.Event.Result.Test.Unit {
     }
 }
 
-extension Kernel.Completion.Event.Result.Test.`Edge Case` {
+extension `Kernel.Completion.Event.Result Tests`.Test.`Edge Case` {
     @Test
     func `Int32 max is success`() {
         let result = Kernel.Completion.Event.Result(rawValue: .max)

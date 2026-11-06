@@ -3,14 +3,16 @@ import Testing
 
 @_spi(Syscall) @testable import Kernel_Completion
 
-extension Kernel.Completion.Event {
+enum `Kernel.Completion.Event Tests` {}
+
+extension `Kernel.Completion.Event Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Event.Test.Unit {
+extension `Kernel.Completion.Event Tests`.Test.Unit {
     @Test
     func `init with defaults`() {
         let event = Kernel.Completion.Event(
@@ -46,14 +48,16 @@ extension Kernel.Completion.Event.Test.Unit {
     }
 }
 
-extension Kernel.Completion.Event.Flags {
+enum `Kernel.Completion.Event.Flags Tests` {}
+
+extension `Kernel.Completion.Event.Flags Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Event.Flags.Test.Unit {
+extension `Kernel.Completion.Event.Flags Tests`.Test.Unit {
     @Test
     func `more flag has nonzero rawValue`() {
         let more = Kernel.Completion.Event.Flags.more

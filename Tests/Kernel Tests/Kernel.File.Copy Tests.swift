@@ -3,7 +3,9 @@ import Testing
 
 @testable import Kernel
 
-extension Kernel.File.Copy {
+enum `Kernel.File.Copy Tests` {}
+
+extension `Kernel.File.Copy Tests` {
     @Suite struct Test {
         @Suite struct Unit {}
         #if !os(Windows)
@@ -14,7 +16,7 @@ extension Kernel.File.Copy {
 
 #if !os(Windows)
 
-    extension Kernel.File.Copy.Test.`Edge Case` {
+    extension `Kernel.File.Copy Tests`.Test.`Edge Case` {
         @Test func `Path scope rejects a target string containing an interior NUL byte`() {
             let targetWithNUL = "/tmp/before\0after"
 
@@ -24,7 +26,7 @@ extension Kernel.File.Copy {
         }
     }
 
-    extension Kernel.File.Copy.Test.Unit {
+    extension `Kernel.File.Copy Tests`.Test.Unit {
         @Test
         func `copying a symlink with followSymlinks false recreates the link at the destination`()
             throws

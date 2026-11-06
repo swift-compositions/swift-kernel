@@ -6,7 +6,9 @@ import Testing
 
 @testable import Kernel
 
-extension Kernel.Copy.Error {
+enum `Kernel.Copy.Error Tests` {}
+
+extension `Kernel.Copy.Error Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -14,7 +16,7 @@ extension Kernel.Copy.Error {
     }
 }
 
-extension Kernel.Copy.Error.Test.Unit {
+extension `Kernel.Copy.Error Tests`.Test.Unit {
     @Test
     func `invalidDescriptor case exists`() {
         let error = Kernel.Copy.Error.invalidDescriptor
@@ -76,7 +78,7 @@ extension Kernel.Copy.Error.Test.Unit {
     }
 }
 
-extension Kernel.Copy.Error.Test.Unit {
+extension `Kernel.Copy.Error Tests`.Test.Unit {
     @Test
     func `invalidDescriptor description`() {
         #expect(Kernel.Copy.Error.invalidDescriptor.description == "invalid file descriptor")
@@ -108,7 +110,7 @@ extension Kernel.Copy.Error.Test.Unit {
     }
 }
 
-extension Kernel.Copy.Error.Test.Unit {
+extension `Kernel.Copy.Error Tests`.Test.Unit {
     @Test
     func `Error conforms to Swift.Error`() {
         let error: any Swift.Error = Kernel.Copy.Error.invalidDescriptor
@@ -140,7 +142,7 @@ extension Kernel.Copy.Error.Test.Unit {
     }
 }
 
-extension Kernel.Copy.Error.Test.EdgeCase {
+extension `Kernel.Copy.Error Tests`.Test.EdgeCase {
     @Test
     func `all cases are distinct`() {
         let cases: [Kernel.Copy.Error] = [
@@ -170,7 +172,7 @@ extension Kernel.Copy.Error.Test.EdgeCase {
         import Musl
     #endif
 
-    extension Kernel.Copy.Error.Test.Unit {
+    extension `Kernel.Copy.Error Tests`.Test.Unit {
         @Test
         func `EBADF maps to invalidDescriptor`() {
             let error = Kernel.Copy.Error(posixErrno: EBADF)
@@ -244,7 +246,7 @@ extension Kernel.Copy.Error.Test.EdgeCase {
         import Musl
     #endif
 
-    extension Kernel.Copy.Error.Test.EdgeCase {
+    extension `Kernel.Copy.Error Tests`.Test.EdgeCase {
         @Test
         func `EINTR from copy_file_range(2) is passed through as a platform error, not unsupported`() {
             #expect(Kernel.Copy.Error(posixErrno: EINTR) == .platform(code: .posix(EINTR)))

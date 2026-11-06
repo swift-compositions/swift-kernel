@@ -6,7 +6,9 @@ import Testing
 
 @testable import Kernel
 
-extension Kernel.File.Direct {
+enum `Kernel.File.Direct Tests` {}
+
+extension `Kernel.File.Direct Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -14,7 +16,7 @@ extension Kernel.File.Direct {
     }
 }
 
-extension Kernel.File.Direct.Test.Unit {
+extension `Kernel.File.Direct Tests`.Test.Unit {
     @Test
     func `Direct namespace exists`() {
         _ = Kernel.File.Direct.self
@@ -26,7 +28,7 @@ extension Kernel.File.Direct.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Test.Unit {
+extension `Kernel.File.Direct Tests`.Test.Unit {
     @Test
     func `Direct.Capability type exists`() {
         let _: Kernel.File.Direct.Capability.Type = Kernel.File.Direct.Capability.self
@@ -48,7 +50,7 @@ extension Kernel.File.Direct.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Test.Unit {
+extension `Kernel.File.Direct Tests`.Test.Unit {
     @Test
     func `direct mode resolved is equatable`() {
         #expect(Kernel.File.Direct.Mode.Resolved.buffered == .buffered)

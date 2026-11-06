@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Requirements.Reason {
+enum `Kernel.File.Direct.Requirements.Reason Tests` {}
+
+extension `Kernel.File.Direct.Requirements.Reason Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Requirements.Reason {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Reason.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     @Test
     func `platformUnsupported case exists`() {
         let reason = Kernel.File.Direct.Requirements.Reason.platformUnsupported
@@ -52,7 +54,7 @@ extension Kernel.File.Direct.Requirements.Reason.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Reason.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     @Test
     func `platformUnsupported description`() {
         let reason = Kernel.File.Direct.Requirements.Reason.platformUnsupported
@@ -78,7 +80,7 @@ extension Kernel.File.Direct.Requirements.Reason.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Reason.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     @Test
     func `Reason is Sendable`() {
         let reason: any Sendable = Kernel.File.Direct.Requirements.Reason.platformUnsupported
@@ -102,7 +104,7 @@ extension Kernel.File.Direct.Requirements.Reason.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Reason.Test.EdgeCase {
+extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.EdgeCase {
     @Test
     func `all reasons are distinct`() {
         let reasons: [Kernel.File.Direct.Requirements.Reason] = [

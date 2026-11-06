@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Capability {
+enum `Kernel.File.Direct.Capability Tests` {}
+
+extension `Kernel.File.Direct.Capability Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Capability {
     }
 }
 
-extension Kernel.File.Direct.Capability.Test.Unit {
+extension `Kernel.File.Direct.Capability Tests`.Test.Unit {
     @Test
     func `directSupported case exists`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -43,7 +45,7 @@ extension Kernel.File.Direct.Capability.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Capability.Test.Unit {
+extension `Kernel.File.Direct.Capability Tests`.Test.Unit {
     @Test
     func `direct.isSupported returns true for directSupported`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -103,7 +105,7 @@ extension Kernel.File.Direct.Capability.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Capability.Test.Unit {
+extension `Kernel.File.Direct.Capability Tests`.Test.Unit {
     @Test
     func `Capability is Sendable`() {
         let capability: any Sendable = Kernel.File.Direct.Capability.uncachedOnly
@@ -120,7 +122,7 @@ extension Kernel.File.Direct.Capability.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Capability.Test.EdgeCase {
+extension `Kernel.File.Direct.Capability Tests`.Test.EdgeCase {
     @Test
     func `all simple cases are distinct`() {
         let uncached = Kernel.File.Direct.Capability.uncachedOnly

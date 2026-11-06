@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.Copy {
+enum `Kernel.Copy Tests` {}
+
+extension `Kernel.Copy Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.Copy {
     }
 }
 
-extension Kernel.Copy.Test.Unit {
+extension `Kernel.Copy Tests`.Test.Unit {
     @Test
     func `Copy namespace exists`() {
 
@@ -28,7 +30,7 @@ extension Kernel.Copy.Test.Unit {
     }
 }
 
-extension Kernel.Copy.Test.Unit {
+extension `Kernel.Copy Tests`.Test.Unit {
     @Test
     func `Copy.Error type exists`() {
         let _: Kernel.Copy.Error.Type = Kernel.Copy.Error.self

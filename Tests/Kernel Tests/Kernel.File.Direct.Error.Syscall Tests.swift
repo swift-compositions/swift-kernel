@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Error.Syscall {
+enum `Kernel.File.Direct.Error.Syscall Tests` {}
+
+extension `Kernel.File.Direct.Error.Syscall Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Error.Syscall {
     }
 }
 
-extension Kernel.File.Direct.Error.Syscall.Test.Unit {
+extension `Kernel.File.Direct.Error.Syscall Tests`.Test.Unit {
     @Test
     func `platform case exists`() {
         let syscall = Kernel.File.Direct.Error.Syscall.platform(code: .posix(1), operation: .open)
@@ -52,7 +54,7 @@ extension Kernel.File.Direct.Error.Syscall.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Syscall.Test.Unit {
+extension `Kernel.File.Direct.Error.Syscall Tests`.Test.Unit {
     @Test
     func `Syscall conforms to Swift.Error`() {
         let syscall: any Swift.Error = Kernel.File.Direct.Error.Syscall.platform(
@@ -81,7 +83,7 @@ extension Kernel.File.Direct.Error.Syscall.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Syscall.Test.Unit {
+extension `Kernel.File.Direct.Error.Syscall Tests`.Test.Unit {
     @Test
     func `platform stores error code`() {
         let syscall = Kernel.File.Direct.Error.Syscall.platform(code: .posix(42), operation: .open)
@@ -153,7 +155,7 @@ extension Kernel.File.Direct.Error.Syscall.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Syscall.Test.EdgeCase {
+extension `Kernel.File.Direct.Error.Syscall Tests`.Test.EdgeCase {
     @Test
     func `different cases with same operation are distinct`() {
         let invalidDesc = Kernel.File.Direct.Error.Syscall.invalidDescriptor(operation: .read)

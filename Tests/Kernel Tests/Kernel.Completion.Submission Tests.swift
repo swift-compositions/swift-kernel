@@ -9,14 +9,16 @@ import Testing
     public import Windows_Kernel_File
 #endif
 
-extension Kernel.Completion.Submission {
+enum `Kernel.Completion.Submission Tests` {}
+
+extension `Kernel.Completion.Submission Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Submission.Test.Unit {
+extension `Kernel.Completion.Submission Tests`.Test.Unit {
     @Test
     func `init with nop uses defaults`() {
         let token: Kernel.Completion.Token = 42

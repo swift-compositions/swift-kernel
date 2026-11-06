@@ -29,14 +29,16 @@ import Testing
     }
 #endif
 
-extension Kernel.File.Open.Configuration {
+enum `Kernel.File.Open.Configuration Tests` {}
+
+extension `Kernel.File.Open.Configuration Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.File.Open.Configuration.Test.Unit {
+extension `Kernel.File.Open.Configuration Tests`.Test.Unit {
 
     @Test
     func `default configuration`() {

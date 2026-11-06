@@ -2,14 +2,16 @@ import Testing
 
 @testable import Kernel_Completion
 
-extension Kernel.Completion.Error {
+enum `Kernel.Completion.Error Tests` {}
+
+extension `Kernel.Completion.Error Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Error.Test.Unit {
+extension `Kernel.Completion.Error Tests`.Test.Unit {
     @Test
     func `submissionQueueFull is equatable`() {
         let a = Kernel.Completion.Error.submissionQueueFull

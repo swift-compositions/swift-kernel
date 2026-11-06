@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Mode.Policy {
+enum `Kernel.File.Direct.Mode.Policy Tests` {}
+
+extension `Kernel.File.Direct.Mode.Policy Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Mode.Policy {
     }
 }
 
-extension Kernel.File.Direct.Mode.Policy.Test.Unit {
+extension `Kernel.File.Direct.Mode.Policy Tests`.Test.Unit {
     @Test
     func `fallbackToBuffered case exists`() {
         let policy = Kernel.File.Direct.Mode.Policy.fallbackToBuffered
@@ -32,7 +34,7 @@ extension Kernel.File.Direct.Mode.Policy.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Policy.Test.Unit {
+extension `Kernel.File.Direct.Mode.Policy Tests`.Test.Unit {
     @Test
     func `Policy is Sendable`() {
         let policy: any Sendable = Kernel.File.Direct.Mode.Policy.fallbackToBuffered
@@ -49,7 +51,7 @@ extension Kernel.File.Direct.Mode.Policy.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Policy.Test.EdgeCase {
+extension `Kernel.File.Direct.Mode.Policy Tests`.Test.EdgeCase {
     @Test
     func `all policies are distinct`() {
         let fallback = Kernel.File.Direct.Mode.Policy.fallbackToBuffered

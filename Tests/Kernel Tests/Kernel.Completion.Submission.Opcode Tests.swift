@@ -4,7 +4,9 @@ import Testing
 
 @testable import Kernel_Completion
 
-extension Kernel.Completion.Submission.Opcode {
+enum `Kernel.Completion.Submission.Opcode Tests` {}
+
+extension `Kernel.Completion.Submission.Opcode Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -12,7 +14,7 @@ extension Kernel.Completion.Submission.Opcode {
     }
 }
 
-extension Kernel.Completion.Submission.Opcode.Test.Unit {
+extension `Kernel.Completion.Submission.Opcode Tests`.Test.Unit {
     @Test
     func `same cancel targets compare equal`() {
         let a: Kernel.Completion.Submission.Opcode = .cancel(target: 42)
@@ -69,7 +71,7 @@ extension Kernel.Completion.Submission.Opcode.Test.Unit {
     }
 }
 
-extension Kernel.Completion.Submission.Opcode.Test.Exhaustiveness {
+extension `Kernel.Completion.Submission.Opcode Tests`.Test.Exhaustiveness {
 
     #if !os(Windows)
         @Test

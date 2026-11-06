@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Error.Operation {
+enum `Kernel.File.Direct.Error.Operation Tests` {}
+
+extension `Kernel.File.Direct.Error.Operation Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Error.Operation {
     }
 }
 
-extension Kernel.File.Direct.Error.Operation.Test.Unit {
+extension `Kernel.File.Direct.Error.Operation Tests`.Test.Unit {
     @Test
     func `open case exists`() {
         let operation = Kernel.File.Direct.Error.Operation.open
@@ -62,7 +64,7 @@ extension Kernel.File.Direct.Error.Operation.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Operation.Test.Unit {
+extension `Kernel.File.Direct.Error.Operation Tests`.Test.Unit {
     @Test
     func `Cache.set case exists`() {
         let cache = Kernel.File.Direct.Error.Operation.Cache.set
@@ -82,7 +84,7 @@ extension Kernel.File.Direct.Error.Operation.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Operation.Test.Unit {
+extension `Kernel.File.Direct.Error.Operation Tests`.Test.Unit {
     @Test
     func `Operation is Sendable`() {
         let operation: any Sendable = Kernel.File.Direct.Error.Operation.open
@@ -120,7 +122,7 @@ extension Kernel.File.Direct.Error.Operation.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Operation.Test.EdgeCase {
+extension `Kernel.File.Direct.Error.Operation Tests`.Test.EdgeCase {
     @Test
     func `all simple operations are distinct`() {
         let open = Kernel.File.Direct.Error.Operation.open

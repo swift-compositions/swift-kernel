@@ -3,7 +3,9 @@ import Kernel_Test_Support
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Error {
+enum `Kernel.File.Direct.Error Tests` {}
+
+extension `Kernel.File.Direct.Error Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -11,7 +13,7 @@ extension Kernel.File.Direct.Error {
     }
 }
 
-extension Kernel.File.Direct.Error.Test.Unit {
+extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     @Test
     func `notSupported case exists`() {
         let error = Kernel.File.Direct.Error.notSupported
@@ -83,7 +85,7 @@ extension Kernel.File.Direct.Error.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Test.Unit {
+extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     @Test
     func `notSupported description`() {
         let error = Kernel.File.Direct.Error.notSupported
@@ -124,7 +126,7 @@ extension Kernel.File.Direct.Error.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Test.Unit {
+extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     @Test
     func `Error conforms to Swift.Error`() {
         let error: any Swift.Error = Kernel.File.Direct.Error.notSupported
@@ -147,7 +149,7 @@ extension Kernel.File.Direct.Error.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Test.Unit {
+extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     @Test
     func `Operation type exists`() {
         let _: Kernel.File.Direct.Error.Operation.Type = Kernel.File.Direct.Error.Operation.self
@@ -159,7 +161,7 @@ extension Kernel.File.Direct.Error.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Error.Test.EdgeCase {
+extension `Kernel.File.Direct.Error Tests`.Test.EdgeCase {
     @Test
     func `all simple cases are distinct`() {
         let cases: [Kernel.File.Direct.Error] = [
@@ -209,7 +211,7 @@ extension Kernel.File.Direct.Error.Test.EdgeCase {
         import Musl
     #endif
 
-    extension Kernel.File.Direct.Error.Test.EdgeCase {
+    extension `Kernel.File.Direct.Error Tests`.Test.EdgeCase {
         @Test
         func `alignment violation reports EINVAL per open(2) O_DIRECT and POSIX.1-2024 read`() {
             let error = Kernel.File.Direct.Error(from: .alignmentViolation(operation: .read))

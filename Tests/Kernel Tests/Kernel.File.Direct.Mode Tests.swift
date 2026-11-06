@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Mode {
+enum `Kernel.File.Direct.Mode Tests` {}
+
+extension `Kernel.File.Direct.Mode Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Mode {
     }
 }
 
-extension Kernel.File.Direct.Mode.Test.Unit {
+extension `Kernel.File.Direct.Mode Tests`.Test.Unit {
     @Test
     func `direct case exists`() {
         let mode = Kernel.File.Direct.Mode.direct
@@ -52,7 +54,7 @@ extension Kernel.File.Direct.Mode.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Test.Unit {
+extension `Kernel.File.Direct.Mode Tests`.Test.Unit {
     @Test
     func `Mode is Sendable`() {
         let mode: any Sendable = Kernel.File.Direct.Mode.buffered
@@ -69,7 +71,7 @@ extension Kernel.File.Direct.Mode.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Test.Unit {
+extension `Kernel.File.Direct.Mode Tests`.Test.Unit {
     @Test
     func `Mode.Policy type exists`() {
         let _: Kernel.File.Direct.Mode.Policy.Type = Kernel.File.Direct.Mode.Policy.self
@@ -81,7 +83,7 @@ extension Kernel.File.Direct.Mode.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Mode.Test.EdgeCase {
+extension `Kernel.File.Direct.Mode Tests`.Test.EdgeCase {
     @Test
     func `all simple cases are distinct`() {
         let cases: [Kernel.File.Direct.Mode] = [
@@ -106,7 +108,7 @@ extension Kernel.File.Direct.Mode.Test.EdgeCase {
 }
 
 #if canImport(Darwin)
-    extension Kernel.File.Direct.Mode.Test.Unit {
+    extension `Kernel.File.Direct.Mode Tests`.Test.Unit {
         @Test
         func `uncached resolves to F_NOCACHE on every Darwin platform per fcntl(2)`() throws {
             let resolved = try Kernel.File.Direct.Mode.uncached.resolve(

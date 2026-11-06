@@ -3,7 +3,9 @@ import Kernel_Test_Support
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Requirements.Alignment.Offset {
+enum `Kernel.File.Direct.Requirements.Alignment.Offset Tests` {}
+
+extension `Kernel.File.Direct.Requirements.Alignment.Offset Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -11,7 +13,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Offset {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Offset.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment.Offset Tests`.Test.Unit {
     @Test
     func `Offset type exists`() {
         let _: Kernel.File.Direct.Requirements.Alignment.Offset.Type =
@@ -44,7 +46,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Offset.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Offset.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment.Offset Tests`.Test.Unit {
     @Test
     func `Offset is Sendable`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -53,7 +55,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Offset.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Offset.Test.EdgeCase {
+extension `Kernel.File.Direct.Requirements.Alignment.Offset Tests`.Test.EdgeCase {
     @Test
     func `offset accessor returns consistent value`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)

@@ -3,13 +3,15 @@ import Testing
 
 @testable import Kernel
 
-extension Kernel.Failure {
+enum `Kernel.Failure Tests` {}
+
+extension `Kernel.Failure Tests` {
     @Suite struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Failure.Test.Unit {
+extension `Kernel.Failure Tests`.Test.Unit {
     @Test func `io case exists and wraps domain error`() {
         let ioError = Kernel.IO.Error.broken
         let failure = Kernel.Failure.io(ioError)
@@ -116,13 +118,15 @@ extension Kernel.Failure.Test.Unit {
     }
 }
 
-extension Kernel.Process.ID {
+enum `Kernel.Process.ID Tests` {}
+
+extension `Kernel.Process.ID Tests` {
     @Suite struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Process.ID.Test.Unit {
+extension `Kernel.Process.ID Tests`.Test.Unit {
     @Test func `description formats as raw value`() {
         let pid = Kernel.Process.ID(rawValue: 42)
         let desc: Swift.String = pid.description

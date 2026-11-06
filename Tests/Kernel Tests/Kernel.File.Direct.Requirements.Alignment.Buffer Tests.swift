@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Requirements.Alignment.Buffer {
+enum `Kernel.File.Direct.Requirements.Alignment.Buffer Tests` {}
+
+extension `Kernel.File.Direct.Requirements.Alignment.Buffer Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Buffer {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Buffer.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment.Buffer Tests`.Test.Unit {
     @Test
     func `Buffer type exists`() {
         let _: Kernel.File.Direct.Requirements.Alignment.Buffer.Type =
@@ -28,7 +30,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Buffer.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Buffer.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment.Buffer Tests`.Test.Unit {
     @Test
     func `Buffer is Sendable`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -37,7 +39,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Buffer.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Buffer.Test.EdgeCase {
+extension `Kernel.File.Direct.Requirements.Alignment.Buffer Tests`.Test.EdgeCase {
     @Test
     func `buffer accessor returns consistent value`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)

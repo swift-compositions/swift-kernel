@@ -2,14 +2,16 @@ import Testing
 
 @testable import Kernel_Completion
 
-extension Kernel.Completion.Capabilities {
+enum `Kernel.Completion.Capabilities Tests` {}
+
+extension `Kernel.Completion.Capabilities Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Capabilities.Test.Unit {
+extension `Kernel.Completion.Capabilities Tests`.Test.Unit {
     @Test
     func `default init has all capabilities false`() {
         let caps = Kernel.Completion.Capabilities()

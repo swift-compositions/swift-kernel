@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Requirements.Alignment {
+enum `Kernel.File.Direct.Requirements.Alignment Tests` {}
+
+extension `Kernel.File.Direct.Requirements.Alignment Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Requirements.Alignment {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment Tests`.Test.Unit {
     @Test
     func `init with explicit values`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(
@@ -50,7 +52,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment Tests`.Test.Unit {
     @Test
     func `buffer accessor exists`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -70,7 +72,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment Tests`.Test.Unit {
     @Test
     func `Alignment is Sendable`() {
         let alignment: any Sendable = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -87,7 +89,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Test.EdgeCase {
+extension `Kernel.File.Direct.Requirements.Alignment Tests`.Test.EdgeCase {
     @Test
     func `alignments with different buffer values are distinct`() {
         let a = Kernel.File.Direct.Requirements.Alignment(

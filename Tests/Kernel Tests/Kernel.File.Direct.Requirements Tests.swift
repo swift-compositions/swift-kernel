@@ -2,7 +2,9 @@ import Kernel
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Requirements {
+enum `Kernel.File.Direct.Requirements Tests` {}
+
+extension `Kernel.File.Direct.Requirements Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -10,7 +12,7 @@ extension Kernel.File.Direct.Requirements {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Test.Unit {
+extension `Kernel.File.Direct.Requirements Tests`.Test.Unit {
     @Test
     func `known case exists`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -33,7 +35,7 @@ extension Kernel.File.Direct.Requirements.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Test.Unit {
+extension `Kernel.File.Direct.Requirements Tests`.Test.Unit {
     @Test
     func `init with explicit alignment values`() {
         let requirements = Kernel.File.Direct.Requirements(
@@ -63,7 +65,7 @@ extension Kernel.File.Direct.Requirements.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Test.Unit {
+extension `Kernel.File.Direct.Requirements Tests`.Test.Unit {
     @Test
     func `Requirements is Sendable`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -83,7 +85,7 @@ extension Kernel.File.Direct.Requirements.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Test.Unit {
+extension `Kernel.File.Direct.Requirements Tests`.Test.Unit {
     @Test
     func `Alignment type exists`() {
         let _: Kernel.File.Direct.Requirements.Alignment.Type = Kernel.File.Direct.Requirements
@@ -97,7 +99,7 @@ extension Kernel.File.Direct.Requirements.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Test.EdgeCase {
+extension `Kernel.File.Direct.Requirements Tests`.Test.EdgeCase {
     @Test
     func `known with different alignments are distinct`() {
         let align1 = Kernel.File.Direct.Requirements.Alignment(uniform: .`512`)

@@ -2,14 +2,16 @@ import Testing
 
 @testable import Kernel_Completion
 
-extension Kernel.Completion.Submission.Flags {
+enum `Kernel.Completion.Submission.Flags Tests` {}
+
+extension `Kernel.Completion.Submission.Flags Tests` {
     @Suite
     struct `Shell Test` {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Submission.Flags.`Shell Test`.Unit {
+extension `Kernel.Completion.Submission.Flags Tests`.`Shell Test`.Unit {
     @Test
     func `empty flags has zero rawValue`() {
         let flags: Kernel.Completion.Submission.Flags = []

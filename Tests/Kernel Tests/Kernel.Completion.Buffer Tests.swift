@@ -3,14 +3,16 @@ import Testing
 
 @testable import Kernel_Completion
 
-extension Kernel.Completion.Buffer {
+enum `Kernel.Completion.Buffer Tests` {}
+
+extension `Kernel.Completion.Buffer Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Buffer.Test.Unit {
+extension `Kernel.Completion.Buffer Tests`.Test.Unit {
     @Test
     func `buffer namespace exists`() {
         _ = Kernel.Completion.Buffer.self

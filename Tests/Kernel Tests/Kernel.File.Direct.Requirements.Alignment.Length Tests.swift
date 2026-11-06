@@ -3,7 +3,9 @@ import Kernel_Test_Support
 import Tagged
 import Testing
 
-extension Kernel.File.Direct.Requirements.Alignment.Length {
+enum `Kernel.File.Direct.Requirements.Alignment.Length Tests` {}
+
+extension `Kernel.File.Direct.Requirements.Alignment.Length Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -11,7 +13,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Length {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Length.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment.Length Tests`.Test.Unit {
     @Test
     func `Length type exists`() {
         let _: Kernel.File.Direct.Requirements.Alignment.Length.Type =
@@ -46,7 +48,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Length.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Length.Test.Unit {
+extension `Kernel.File.Direct.Requirements.Alignment.Length Tests`.Test.Unit {
     @Test
     func `Length is Sendable`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)
@@ -55,7 +57,7 @@ extension Kernel.File.Direct.Requirements.Alignment.Length.Test.Unit {
     }
 }
 
-extension Kernel.File.Direct.Requirements.Alignment.Length.Test.EdgeCase {
+extension `Kernel.File.Direct.Requirements.Alignment.Length Tests`.Test.EdgeCase {
     @Test
     func `length accessor returns consistent value`() {
         let alignment = Kernel.File.Direct.Requirements.Alignment(uniform: .`4096`)

@@ -42,7 +42,9 @@ import Testing
     }
 #endif
 
-extension Kernel.File.Clone {
+enum `Kernel.File.Clone Tests` {}
+
+extension `Kernel.File.Clone Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
@@ -50,7 +52,7 @@ extension Kernel.File.Clone {
     }
 }
 
-extension Kernel.File.Clone.Test.Unit {
+extension `Kernel.File.Clone Tests`.Test.Unit {
 
     @Test
     func `Capability enum values`() {
@@ -95,7 +97,7 @@ extension Kernel.File.Clone.Test.Unit {
     }
 }
 
-extension Kernel.File.Clone.Test.Unit {
+extension `Kernel.File.Clone Tests`.Test.Unit {
 
     @Test
     func `error descriptions are meaningful`() {
@@ -133,7 +135,7 @@ extension Kernel.File.Clone.Test.Unit {
 }
 
 #if os(macOS)
-    extension Kernel.File.Clone.Test.Unit {
+    extension `Kernel.File.Clone Tests`.Test.Unit {
         @Test
         func `probe capability returns valid result`() throws {
 
@@ -145,7 +147,7 @@ extension Kernel.File.Clone.Test.Unit {
         }
     }
 
-    extension Kernel.File.Clone.Test.`Edge Case` {
+    extension `Kernel.File.Clone Tests`.Test.`Edge Case` {
         @Test
         func `probe nonexistent path throws`() {
             typealias E = Path.String.Error<Darwin.Kernel.File.Clone.Error.Syscall>
@@ -166,7 +168,7 @@ extension Kernel.File.Clone.Test.Unit {
 #endif
 
 #if !os(Windows)
-    extension Kernel.File.Clone.Test.Unit {
+    extension `Kernel.File.Clone Tests`.Test.Unit {
 
         @Test
         func `copyOnly creates independent copy`() throws {
@@ -309,7 +311,7 @@ extension Kernel.File.Clone.Test.Unit {
         }
     }
 
-    extension Kernel.File.Clone.Test.`Edge Case` {
+    extension `Kernel.File.Clone Tests`.Test.`Edge Case` {
 
         @Test
         func `clone to existing destination fails`() throws {

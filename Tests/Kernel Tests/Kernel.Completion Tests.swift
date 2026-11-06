@@ -2,14 +2,16 @@ import Testing
 
 @testable import Kernel_Completion
 
-extension Kernel.Completion {
+enum `Kernel.Completion Tests` {}
+
+extension `Kernel.Completion Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
     }
 }
 
-extension Kernel.Completion.Test.Unit {
+extension `Kernel.Completion Tests`.Test.Unit {
     @Test
     func `completion namespace exists`() {
         _ = Kernel.Completion.self

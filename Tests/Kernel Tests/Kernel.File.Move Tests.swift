@@ -3,7 +3,9 @@ import Testing
 
 @testable import Kernel
 
-extension Kernel.File.Move {
+enum `Kernel.File.Move Tests` {}
+
+extension `Kernel.File.Move Tests` {
     @Suite struct Test {
         @Suite struct Unit {}
         @Suite struct `Edge Case` {}
@@ -12,7 +14,7 @@ extension Kernel.File.Move {
 
 #if !os(Windows)
 
-    extension Kernel.File.Move.Test {
+    extension `Kernel.File.Move Tests`.Test {
 
         static func create(_ path: Swift.String) throws {
             let descriptor = try Path.scope(path) { path in
@@ -49,48 +51,48 @@ extension Kernel.File.Move {
         }
     }
 
-    extension Kernel.File.Move.Test.Unit {
+    extension `Kernel.File.Move Tests`.Test.Unit {
 
         @Test
         func `exclusive renames onto a free destination`() throws {
             let source = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-src")
             let destination = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-dst")
-            try Kernel.File.Move.Test.create(source)
+            try `Kernel.File.Move Tests`.Test.create(source)
             defer {
-                Kernel.File.Move.Test.delete(source)
-                Kernel.File.Move.Test.delete(destination)
+                `Kernel.File.Move Tests`.Test.delete(source)
+                `Kernel.File.Move Tests`.Test.delete(destination)
             }
-            let sourceInode = try Kernel.File.Move.Test.inode(source)
+            let sourceInode = try `Kernel.File.Move Tests`.Test.inode(source)
 
-            let error = try Kernel.File.Move.Test.exclusive(from: source, to: destination)
+            let error = try `Kernel.File.Move Tests`.Test.exclusive(from: source, to: destination)
 
             #expect(error == nil)
-            #expect(try Kernel.File.Move.Test.inode(destination) == sourceInode)
-            #expect((try? Kernel.File.Move.Test.inode(source)) == nil)
+            #expect(try `Kernel.File.Move Tests`.Test.inode(destination) == sourceInode)
+            #expect((try? `Kernel.File.Move Tests`.Test.inode(source)) == nil)
         }
 
         @Test
         func `exclusive refuses an existing destination and leaves both files in place`() throws {
             let source = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-src")
             let destination = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-dst")
-            try Kernel.File.Move.Test.create(source)
-            try Kernel.File.Move.Test.create(destination)
+            try `Kernel.File.Move Tests`.Test.create(source)
+            try `Kernel.File.Move Tests`.Test.create(destination)
             defer {
-                Kernel.File.Move.Test.delete(source)
-                Kernel.File.Move.Test.delete(destination)
+                `Kernel.File.Move Tests`.Test.delete(source)
+                `Kernel.File.Move Tests`.Test.delete(destination)
             }
-            let sourceInode = try Kernel.File.Move.Test.inode(source)
-            let destinationInode = try Kernel.File.Move.Test.inode(destination)
+            let sourceInode = try `Kernel.File.Move Tests`.Test.inode(source)
+            let destinationInode = try `Kernel.File.Move Tests`.Test.inode(destination)
 
-            let error = try Kernel.File.Move.Test.exclusive(from: source, to: destination)
+            let error = try `Kernel.File.Move Tests`.Test.exclusive(from: source, to: destination)
 
             #expect(error == .exists)
-            #expect(try Kernel.File.Move.Test.inode(source) == sourceInode)
-            #expect(try Kernel.File.Move.Test.inode(destination) == destinationInode)
+            #expect(try `Kernel.File.Move Tests`.Test.inode(source) == sourceInode)
+            #expect(try `Kernel.File.Move Tests`.Test.inode(destination) == destinationInode)
         }
     }
 
-    extension Kernel.File.Move.Test.`Edge Case` {
+    extension `Kernel.File.Move Tests`.Test.`Edge Case` {
 
         // A dangling symlink is an entry `stat` cannot see, standing in for a
         // file that appears after a check: only an exclusive rename refuses it.
@@ -99,22 +101,22 @@ extension Kernel.File.Move {
             let source = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-src")
             let destination = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-dst")
             let missing = Kernel.Temporary.filePath(prefix: "kernel-move-exclusive-missing")
-            try Kernel.File.Move.Test.create(source)
+            try `Kernel.File.Move Tests`.Test.create(source)
             try Path.scope(missing, destination) { missing, destination in
                 try Kernel.Link.Symbolic.create(target: missing, at: destination)
             }
             defer {
-                Kernel.File.Move.Test.delete(source)
-                Kernel.File.Move.Test.delete(destination)
+                `Kernel.File.Move Tests`.Test.delete(source)
+                `Kernel.File.Move Tests`.Test.delete(destination)
             }
-            let sourceInode = try Kernel.File.Move.Test.inode(source)
-            let linkInode = try Kernel.File.Move.Test.inode(destination)
+            let sourceInode = try `Kernel.File.Move Tests`.Test.inode(source)
+            let linkInode = try `Kernel.File.Move Tests`.Test.inode(destination)
 
-            let error = try Kernel.File.Move.Test.exclusive(from: source, to: destination)
+            let error = try `Kernel.File.Move Tests`.Test.exclusive(from: source, to: destination)
 
             #expect(error == .exists)
-            #expect(try Kernel.File.Move.Test.inode(source) == sourceInode)
-            #expect(try Kernel.File.Move.Test.inode(destination) == linkInode)
+            #expect(try `Kernel.File.Move Tests`.Test.inode(source) == sourceInode)
+            #expect(try `Kernel.File.Move Tests`.Test.inode(destination) == linkInode)
         }
     }
 

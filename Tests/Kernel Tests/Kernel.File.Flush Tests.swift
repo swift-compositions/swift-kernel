@@ -2,7 +2,9 @@ import Kernel
 import Kernel_Test_Support
 import Testing
 
-extension Kernel.File.Flush {
+enum `Kernel.File.Flush Tests` {}
+
+extension `Kernel.File.Flush Tests` {
     @Suite
     struct Test {
         @Suite struct Flush {}
@@ -13,7 +15,7 @@ extension Kernel.File.Flush {
 
 #if !os(Windows)
 
-    extension Kernel.File.Flush.Test.Flush {
+    extension `Kernel.File.Flush Tests`.Test.Flush {
         @Test
         func `flush(_:) on a fresh tmp file succeeds on every platform`() throws {
             try KernelIOTest.withTempFile(prefix: "flush-smoke") { _, fd in
@@ -27,7 +29,7 @@ extension Kernel.File.Flush {
 
 #if !os(Windows)
 
-    extension Kernel.File.Flush.Test.Data {
+    extension `Kernel.File.Flush Tests`.Test.Data {
         @Test
         func `data(_:) on a fresh tmp file succeeds on every platform`() throws {
             try KernelIOTest.withTempFile(prefix: "flush-data") { _, fd in
@@ -39,7 +41,7 @@ extension Kernel.File.Flush {
 
 #endif
 
-extension Kernel.File.Flush.Test.Directory {
+extension `Kernel.File.Flush Tests`.Test.Directory {
     @Test
     func `directory(path:) on the system temp directory succeeds (POSIX) / no-ops (Windows)`()
         throws

@@ -8,8 +8,11 @@ extension `Kernel.File.Direct.Mode.Resolved Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.File.Direct.Mode.Resolved Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.Unit {

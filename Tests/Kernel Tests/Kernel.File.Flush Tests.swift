@@ -7,10 +7,15 @@ enum `Kernel.File.Flush Tests` {}
 extension `Kernel.File.Flush Tests` {
     @Suite
     struct Test {
-        @Suite struct Flush {}
-        @Suite struct `Data` {}
-        @Suite struct `Directory` {}
     }
+}
+
+extension `Kernel.File.Flush Tests`.Test {
+    @Suite struct Flush {}
+
+    @Suite struct `Data` {}
+
+    @Suite struct `Directory` {}
 }
 
 #if !os(Windows)

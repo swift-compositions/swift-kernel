@@ -8,8 +8,11 @@ extension `Kernel.File.Direct.Error.Syscall Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.File.Direct.Error.Syscall Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.File.Direct.Error.Syscall Tests`.Test.Unit {

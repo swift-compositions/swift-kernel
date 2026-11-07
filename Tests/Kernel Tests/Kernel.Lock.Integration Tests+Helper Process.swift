@@ -1,7 +1,7 @@
 #if canImport(Foundation) && !os(Windows)
     import Foundation
 
-    extension `Kernel.Lock Integration` {
+    extension `Kernel.Lock.Integration Tests`.`Kernel.Lock Integration` {
 
         static let helperName = "_Lock Test Process"
 

@@ -12,8 +12,11 @@ import Testing
         @Suite
         struct Test {
             @Suite struct Unit {}
-            @Suite struct EdgeCase {}
         }
+    }
+
+    extension Kernel.Copy.Clone.Test {
+        @Suite struct EdgeCase {}
     }
 
     extension Kernel.Copy.Clone.Test.Unit {

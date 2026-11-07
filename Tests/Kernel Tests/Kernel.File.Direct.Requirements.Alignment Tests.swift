@@ -8,8 +8,11 @@ extension `Kernel.File.Direct.Requirements.Alignment Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.File.Direct.Requirements.Alignment Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.File.Direct.Requirements.Alignment Tests`.Test.Unit {

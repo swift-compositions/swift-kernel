@@ -10,8 +10,11 @@ extension `Kernel.Completion.Submission.Opcode Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct `Exhaustiveness` {}
     }
+}
+
+extension `Kernel.Completion.Submission.Opcode Tests`.Test {
+    @Suite struct `Exhaustiveness` {}
 }
 
 extension `Kernel.Completion.Submission.Opcode Tests`.Test.Unit {

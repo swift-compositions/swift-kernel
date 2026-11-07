@@ -19,12 +19,14 @@ extension `Kernel.Completion.Buffer Tests`.Test.Unit {
     }
 }
 
-@Suite
-struct `Completion Buffer Group Tests` {
-    @Suite struct Unit {}
+extension `Kernel.Completion.Buffer Tests` {
+    @Suite
+    struct `Completion Buffer Group Tests` {
+        @Suite struct Unit {}
+    }
 }
 
-extension `Completion Buffer Group Tests`.Unit {
+extension `Kernel.Completion.Buffer Tests`.`Completion Buffer Group Tests`.Unit {
     @Test
     func `none group`() {
         let group = Kernel.Completion.Buffer.Group.none

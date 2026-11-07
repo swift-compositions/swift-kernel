@@ -12,8 +12,11 @@ extension `Kernel.File.Direct Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.File.Direct Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.File.Direct Tests`.Test.Unit {

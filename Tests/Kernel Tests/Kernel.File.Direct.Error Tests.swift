@@ -9,8 +9,11 @@ extension `Kernel.File.Direct.Error Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.File.Direct.Error Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.File.Direct.Error Tests`.Test.Unit {

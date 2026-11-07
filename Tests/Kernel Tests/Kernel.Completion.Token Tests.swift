@@ -3,12 +3,16 @@ import Testing
 
 @testable import Kernel_Completion
 
-@Suite
-struct `Completion Token Tests` {
-    @Suite struct Unit {}
+enum `Kernel.Completion.Token Tests` {}
+
+extension `Kernel.Completion.Token Tests` {
+    @Suite
+    struct `Completion Token Tests` {
+        @Suite struct Unit {}
+    }
 }
 
-extension `Completion Token Tests`.Unit {
+extension `Kernel.Completion.Token Tests`.`Completion Token Tests`.Unit {
     @Test
     func `zero token`() {
         let token = Kernel.Completion.Token.zero

@@ -8,8 +8,11 @@ extension `Kernel.Copy Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.Copy Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.Copy Tests`.Test.Unit {

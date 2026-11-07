@@ -5,20 +5,35 @@
 
     @_spi(Syscall) @testable import Kernel_Completion
 
-    @Suite
-    struct `Completion Lifecycle Tests` {
+enum `Kernel.Completion.Lifecycle Tests` {}
+
+extension `Kernel.Completion.Lifecycle Tests` {
+        @Suite
+        struct `Completion Lifecycle Tests` {
+        }
+}
+
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests` {
         @Suite struct `Full Lifecycle` {}
+
         @Suite struct `Error Propagation` {}
+
         @Suite struct `Untargeted Submit` {}
+
         @Suite struct `Drain Delivery` {}
+
         @Suite struct `Submission Independence` {}
+
         @Suite struct `Flags Composability` {}
+
         @Suite struct `Result Boundary` {}
+
         @Suite struct `Token Identity` {}
+
         @Suite struct `Notification Ownership` {}
     }
 
-    extension `Completion Lifecycle Tests`.`Full Lifecycle` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Full Lifecycle` {
         @Test
         func `create submit flush drain close sequence`() throws {
             var submitLog: [(Kernel.Completion.Submission.Opcode, Kernel.Completion.Token)] = []
@@ -125,7 +140,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Error Propagation` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Error Propagation` {
         @Test
         func `submit propagates submissionQueueFull`() throws {
             let error: Kernel.Completion.Error = .submissionQueueFull
@@ -193,7 +208,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Untargeted Submit` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Untargeted Submit` {
         @Test
         func `untargeted submit passes invalid descriptor sentinel`() throws {
             var receivedRawDescriptor: Int32? = nil
@@ -220,7 +235,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Drain Delivery` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Drain Delivery` {
         @Test
         func `drain delivers events with more flag`() {
             let event = Kernel.Completion.Event(
@@ -325,7 +340,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Submission Independence` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Submission Independence` {
         @Test
         func `two submissions have independent opcodes`() {
             let address: Memory.Address = 0x1000
@@ -378,7 +393,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Flags Composability` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Flags Composability` {
         @Test
         func `empty flags has rawValue zero`() {
             let flags: Kernel.Completion.Submission.Flags = []
@@ -438,7 +453,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Result Boundary` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Result Boundary` {
         @Test
         func `rawValue zero is success with value zero`() {
             let result = Kernel.Completion.Event.Result(rawValue: 0)
@@ -490,7 +505,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Token Identity` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Token Identity` {
         @Test
         func `same value tokens are equal`() {
             let a = Kernel.Completion.Token(42)
@@ -519,7 +534,7 @@
         }
     }
 
-    extension `Completion Lifecycle Tests`.`Notification Ownership` {
+    extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests`.`Notification Ownership` {
         @Test
         func `notification descriptor is accessible`() {
             let descriptor = Kernel.Descriptor.invalid

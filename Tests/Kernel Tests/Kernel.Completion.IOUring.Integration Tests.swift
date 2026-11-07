@@ -4,115 +4,119 @@
     import Kernel_Test_Support
     @_spi(Syscall) @testable import Kernel
 
-    @Suite(.serialized, .enabled(if: Kernel.IO.Uring.isSupported))
-    struct `IOUring Integration Tests` {
+enum `Kernel.Completion.IOUring.Integration Tests` {}
 
-        @Test func `factory creates valid completion resource`() throws {
-            var completion = try Kernel.Completion.iouring()
+extension `Kernel.Completion.IOUring.Integration Tests` {
+        @Suite(.serialized, .enabled(if: Kernel.IO.Uring.isSupported))
+        struct `IOUring Integration Tests` {
 
-            let hasNotification = completion.notification != nil
-            #expect(hasNotification)
+            @Test func `factory creates valid completion resource`() throws {
+                var completion = try Kernel.Completion.iouring()
 
-            let multishot = completion.capabilities.multishot
-            #expect(multishot)
+                let hasNotification = completion.notification != nil
+                #expect(hasNotification)
 
-            let providedBuffers = completion.capabilities.providedBuffers
-            #expect(providedBuffers)
+                let multishot = completion.capabilities.multishot
+                #expect(multishot)
 
-            completion.close()
-        }
+                let providedBuffers = completion.capabilities.providedBuffers
+                #expect(providedBuffers)
 
-        @Test func `nop submit flush drain round-trip`() throws {
-            var completion = try Kernel.Completion.iouring()
-
-            let token = Kernel.Completion.Token(42)
-            let submission = Kernel.Completion.Submission(opcode: .noOperation, token: token)
-            try completion.submit(submission)
-
-            let flushed = try completion.flush()
-            #expect(flushed > .zero)
-
-            var receivedTokens: [Kernel.Completion.Token] = []
-            var receivedResults: [Kernel.Completion.Event.Result] = []
-
-            let drained = completion.drain { event in
-                receivedTokens.append(event.token)
-                receivedResults.append(event.result)
+                completion.close()
             }
 
-            #expect(drained == 1)
-            #expect(receivedTokens.count == 1)
-            #expect(receivedTokens[0] == 42)
+            @Test func `nop submit flush drain round-trip`() throws {
+                var completion = try Kernel.Completion.iouring()
 
-            let isSuccess = receivedResults[0].isSuccess
-            #expect(isSuccess)
-            let value = receivedResults[0].value
-            #expect(value == 0)
+                let token = Kernel.Completion.Token(42)
+                let submission = Kernel.Completion.Submission(opcode: .noOperation, token: token)
+                try completion.submit(submission)
 
-            completion.close()
-        }
+                let flushed = try completion.flush()
+                #expect(flushed > .zero)
 
-        @Test func `drain returns correct event count`() throws {
-            var completion = try Kernel.Completion.iouring()
+                var receivedTokens: [Kernel.Completion.Token] = []
+                var receivedResults: [Kernel.Completion.Event.Result] = []
 
-            let sub1 = Kernel.Completion.Submission(opcode: .noOperation, token: .init(1))
-            let sub2 = Kernel.Completion.Submission(opcode: .noOperation, token: .init(2))
-            let sub3 = Kernel.Completion.Submission(opcode: .noOperation, token: .init(3))
+                let drained = completion.drain { event in
+                    receivedTokens.append(event.token)
+                    receivedResults.append(event.result)
+                }
 
-            try completion.submit(sub1)
-            try completion.submit(sub2)
-            try completion.submit(sub3)
+                #expect(drained == 1)
+                #expect(receivedTokens.count == 1)
+                #expect(receivedTokens[0] == 42)
 
-            let flushed = try completion.flush()
-            #expect(flushed == 3)
+                let isSuccess = receivedResults[0].isSuccess
+                #expect(isSuccess)
+                let value = receivedResults[0].value
+                #expect(value == 0)
 
-            var receivedTokens: Set<UInt64> = []
-
-            let drained = completion.drain { event in
-                receivedTokens.insert(event.token.underlying)
+                completion.close()
             }
 
-            #expect(drained == 3)
-            #expect(receivedTokens.count == 3)
-            #expect(receivedTokens.contains(1))
-            #expect(receivedTokens.contains(2))
-            #expect(receivedTokens.contains(3))
+            @Test func `drain returns correct event count`() throws {
+                var completion = try Kernel.Completion.iouring()
 
-            completion.close()
-        }
+                let sub1 = Kernel.Completion.Submission(opcode: .noOperation, token: .init(1))
+                let sub2 = Kernel.Completion.Submission(opcode: .noOperation, token: .init(2))
+                let sub3 = Kernel.Completion.Submission(opcode: .noOperation, token: .init(3))
 
-        @Test func `submission with drain flag round-trips through submit flush drain`() throws {
-            var completion = try Kernel.Completion.iouring()
+                try completion.submit(sub1)
+                try completion.submit(sub2)
+                try completion.submit(sub3)
 
-            let plain = Kernel.Completion.Submission(opcode: .noOperation, token: .init(10))
-            let drained = Kernel.Completion.Submission(
-                opcode: .noOperation,
-                token: .init(11),
-                flags: .drain
-            )
+                let flushed = try completion.flush()
+                #expect(flushed == 3)
 
-            try completion.submit(plain)
-            try completion.submit(drained)
+                var receivedTokens: Set<UInt64> = []
 
-            let flushed = try completion.flush()
-            #expect(flushed == 2)
+                let drained = completion.drain { event in
+                    receivedTokens.insert(event.token.underlying)
+                }
 
-            var receivedTokens: Set<UInt64> = []
-            let count = completion.drain { event in
-                receivedTokens.insert(event.token.underlying)
+                #expect(drained == 3)
+                #expect(receivedTokens.count == 3)
+                #expect(receivedTokens.contains(1))
+                #expect(receivedTokens.contains(2))
+                #expect(receivedTokens.contains(3))
+
+                completion.close()
             }
 
-            #expect(count == 2)
-            #expect(receivedTokens == [10, 11])
+            @Test func `submission with drain flag round-trips through submit flush drain`() throws {
+                var completion = try Kernel.Completion.iouring()
 
-            completion.close()
+                let plain = Kernel.Completion.Submission(opcode: .noOperation, token: .init(10))
+                let drained = Kernel.Completion.Submission(
+                    opcode: .noOperation,
+                    token: .init(11),
+                    flags: .drain
+                )
+
+                try completion.submit(plain)
+                try completion.submit(drained)
+
+                let flushed = try completion.flush()
+                #expect(flushed == 2)
+
+                var receivedTokens: Set<UInt64> = []
+                let count = completion.drain { event in
+                    receivedTokens.insert(event.token.underlying)
+                }
+
+                #expect(count == 2)
+                #expect(receivedTokens == [10, 11])
+
+                completion.close()
+            }
+
+            @Test func `close tears down without error`() throws {
+                var completion = try Kernel.Completion.iouring()
+                completion.close()
+
+            }
         }
-
-        @Test func `close tears down without error`() throws {
-            var completion = try Kernel.Completion.iouring()
-            completion.close()
-
-        }
-    }
+}
 
 #endif

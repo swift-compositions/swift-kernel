@@ -7,8 +7,11 @@ enum `Random Tests` {}
 extension `Random Tests` {
     @Suite
     struct Test {
-        @Suite struct Fill {}
     }
+}
+
+extension `Random Tests`.Test {
+    @Suite struct Fill {}
 }
 
 extension `Random Tests`.Test.Fill {

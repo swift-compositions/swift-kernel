@@ -12,8 +12,11 @@ extension `Kernel.Copy.Error Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.Copy.Error Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.Copy.Error Tests`.Test.Unit {

@@ -8,8 +8,11 @@
         @Suite
         struct Test {
             @Suite struct Unit {}
-            @Suite struct EdgeCase {}
         }
+    }
+
+    extension Kernel.Copy.Range.Test {
+        @Suite struct EdgeCase {}
     }
 
     extension Kernel.Copy.Range.Test.Unit {

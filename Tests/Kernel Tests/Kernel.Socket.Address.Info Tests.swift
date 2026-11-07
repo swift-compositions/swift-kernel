@@ -6,8 +6,11 @@ import Testing
     extension Kernel.Socket.Address.Info {
         @Suite
         struct Test {
-            @Suite struct Get {}
         }
+    }
+
+    extension Kernel.Socket.Address.Info.Test {
+        @Suite struct Get {}
     }
 
     extension Kernel.Socket.Address.Info.Test.Get {

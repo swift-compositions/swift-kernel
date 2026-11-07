@@ -4,8 +4,12 @@ import Testing
 
 @testable import Kernel
 
-@Suite
-struct `Kernel.Lock Integration` {}
+enum `Kernel.Lock.Integration Tests` {}
+
+extension `Kernel.Lock.Integration Tests` {
+    @Suite
+    struct `Kernel.Lock Integration` {}
+}
 
 private func createLockFile(prefix: Swift.String) throws -> Swift.String {
     let pathString = Kernel.Temporary.filePath(prefix: prefix)
@@ -42,7 +46,7 @@ private func cleanupLockFile(_ pathString: Swift.String) {
     }
 }
 
-extension `Kernel.Lock Integration` {
+extension `Kernel.Lock.Integration Tests`.`Kernel.Lock Integration` {
     @Test
     func `token acquires and releases lock`() throws {
         let path = try createLockFile(prefix: "kernel-lock-token")
@@ -76,7 +80,7 @@ extension `Kernel.Lock Integration` {
 
 #if canImport(Foundation) && !os(Windows)
 
-    extension `Kernel.Lock Integration` {
+    extension `Kernel.Lock.Integration Tests`.`Kernel.Lock Integration` {
 
         @Test
         func `exclusive lock blocks try-exclusive from another process`() throws {

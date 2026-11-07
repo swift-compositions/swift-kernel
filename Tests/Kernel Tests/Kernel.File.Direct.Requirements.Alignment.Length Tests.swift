@@ -9,8 +9,11 @@ extension `Kernel.File.Direct.Requirements.Alignment.Length Tests` {
     @Suite
     struct Test {
         @Suite struct Unit {}
-        @Suite struct EdgeCase {}
     }
+}
+
+extension `Kernel.File.Direct.Requirements.Alignment.Length Tests`.Test {
+    @Suite struct EdgeCase {}
 }
 
 extension `Kernel.File.Direct.Requirements.Alignment.Length Tests`.Test.Unit {

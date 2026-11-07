@@ -14,9 +14,6 @@ extension Kernel.File.Direct.Capability {
 
     public var direct: Direct { Direct(capability: self) }
 
-    public struct Direct: Sendable {
-        let capability: Kernel.File.Direct.Capability
-    }
 }
 
 extension Kernel.File.Direct.Capability.Direct {
@@ -31,9 +28,6 @@ extension Kernel.File.Direct.Capability {
 
     public var bypass: Bypass { Bypass(capability: self) }
 
-    public struct Bypass: Sendable {
-        let capability: Kernel.File.Direct.Capability
-    }
 }
 
 extension Kernel.File.Direct.Capability.Bypass {

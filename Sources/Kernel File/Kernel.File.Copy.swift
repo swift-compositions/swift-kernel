@@ -80,8 +80,6 @@ extension Kernel.File.Copy {
         overwrite: Bool
     ) throws(Kernel.File.Copy.Error) {
 
-        // Without overwrite the destination is left alone: the copy creates it
-        // exclusively and refuses with `.destinationExists` if it is there.
         guard overwrite else {
             return
         }

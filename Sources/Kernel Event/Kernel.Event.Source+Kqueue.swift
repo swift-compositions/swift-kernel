@@ -152,8 +152,6 @@
                             new: Kernel.Event.Interest
                         ) throws(Kernel.Event.Driver.Error) in
 
-                        // Read and write are one filter each; every vnode interest shares the one
-                        // vnode filter, so a change to its notes re-adds it with the full new set.
                         var toRemove = old.subtracting(new).subtracting(.vnode)
                         var toAdd = new.subtracting(old).subtracting(.vnode)
                         if old.intersection(.vnode) != new.intersection(.vnode) {

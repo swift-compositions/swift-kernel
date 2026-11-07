@@ -25,7 +25,7 @@ extension `Kernel.File.Direct.Requirements.Alignment.Buffer Tests`.Test.Unit {
         let buffer = alignment.buffer
         let bytes = [UInt8](repeating: 0, count: 4096)
         bytes.withUnsafeBytes { pointer in
-            _ = buffer.isAligned(Memory.Address(pointer.baseAddress!))
+            _ = unsafe buffer.isAligned(Memory.Address(pointer.baseAddress!))
         }
     }
 }
@@ -48,7 +48,7 @@ extension `Kernel.File.Direct.Requirements.Alignment.Buffer Tests`.Test.EdgeCase
 
         let bytes = [UInt8](repeating: 0, count: 4096)
         bytes.withUnsafeBytes { pointer in
-            let addr = Memory.Address(pointer.baseAddress!)
+            let addr = unsafe Memory.Address(pointer.baseAddress!)
             let result1 = buffer1.isAligned(addr)
             let result2 = buffer2.isAligned(addr)
             #expect(result1 == result2)

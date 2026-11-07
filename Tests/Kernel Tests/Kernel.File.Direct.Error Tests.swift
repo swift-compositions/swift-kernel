@@ -21,7 +21,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `notSupported case exists`() {
         let error = Kernel.File.Direct.Error.notSupported
         if case .notSupported = error {
-
         } else {
             Issue.record("Expected .notSupported case")
         }
@@ -31,7 +30,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `misalignedBuffer case exists`() {
         let error = Kernel.File.Direct.Error.misalignedBuffer(address: 123, required: .`4096`)
         if case .misalignedBuffer = error {
-
         } else {
             Issue.record("Expected .misalignedBuffer case")
         }
@@ -41,7 +39,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `misalignedOffset case exists`() {
         let error = Kernel.File.Direct.Error.misalignedOffset(offset: 100, required: .`4096`)
         if case .misalignedOffset = error {
-
         } else {
             Issue.record("Expected .misalignedOffset case")
         }
@@ -51,7 +48,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `invalidLength case exists`() {
         let error = Kernel.File.Direct.Error.invalidLength(length: 1000, requiredMultiple: .`4096`)
         if case .invalidLength = error {
-
         } else {
             Issue.record("Expected .invalidLength case")
         }
@@ -61,7 +57,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `modeChange case exists`() {
         let error = Kernel.File.Direct.Error.modeChange
         if case .modeChange = error {
-
         } else {
             Issue.record("Expected .modeChange case")
         }
@@ -71,7 +66,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `invalidHandle case exists`() {
         let error = Kernel.File.Direct.Error.invalidHandle
         if case .invalidHandle = error {
-
         } else {
             Issue.record("Expected .invalidHandle case")
         }
@@ -81,7 +75,6 @@ extension `Kernel.File.Direct.Error Tests`.Test.Unit {
     func `platform case exists`() {
         let error = Kernel.File.Direct.Error.platform(code: .posix(1), operation: .open)
         if case .platform = error {
-
         } else {
             Issue.record("Expected .platform case")
         }
@@ -173,7 +166,7 @@ extension `Kernel.File.Direct.Error Tests`.Test.EdgeCase {
             .invalidHandle,
         ]
 
-        for i in 0..<cases.count {
+        (0..<cases.count).forEach { i in
             for j in (i + 1)..<cases.count {
                 #expect(cases[i] != cases[j])
             }

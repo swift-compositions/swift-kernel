@@ -24,7 +24,6 @@ extension `Kernel.Copy.Error Tests`.Test.Unit {
     func `invalidDescriptor case exists`() {
         let error = Kernel.Copy.Error.invalidDescriptor
         if case .invalidDescriptor = error {
-
         } else {
             Issue.record("Expected .invalidDescriptor case")
         }
@@ -34,7 +33,6 @@ extension `Kernel.Copy.Error Tests`.Test.Unit {
     func `crossDevice case exists`() {
         let error = Kernel.Copy.Error.crossDevice
         if case .crossDevice = error {
-
         } else {
             Issue.record("Expected .crossDevice case")
         }
@@ -44,7 +42,6 @@ extension `Kernel.Copy.Error Tests`.Test.Unit {
     func `unsupported case exists`() {
         let error = Kernel.Copy.Error.unsupported
         if case .unsupported = error {
-
         } else {
             Issue.record("Expected .unsupported case")
         }
@@ -54,7 +51,6 @@ extension `Kernel.Copy.Error Tests`.Test.Unit {
     func `noSpace case exists`() {
         let error = Kernel.Copy.Error.noSpace
         if case .noSpace = error {
-
         } else {
             Issue.record("Expected .noSpace case")
         }
@@ -64,7 +60,6 @@ extension `Kernel.Copy.Error Tests`.Test.Unit {
     func `io case exists`() {
         let error = Kernel.Copy.Error.io
         if case .io = error {
-
         } else {
             Issue.record("Expected .io case")
         }
@@ -74,7 +69,6 @@ extension `Kernel.Copy.Error Tests`.Test.Unit {
     func `permissionDenied case exists`() {
         let error = Kernel.Copy.Error.permissionDenied
         if case .permissionDenied = error {
-
         } else {
             Issue.record("Expected .permissionDenied case")
         }
@@ -157,7 +151,7 @@ extension `Kernel.Copy.Error Tests`.Test.EdgeCase {
             .permissionDenied,
         ]
 
-        for i in 0..<cases.count {
+        (0..<cases.count).forEach { i in
             for j in (i + 1)..<cases.count {
                 #expect(cases[i] != cases[j])
             }
@@ -232,7 +226,6 @@ extension `Kernel.Copy.Error Tests`.Test.EdgeCase {
 
         @Test
         func `unknown error is passed through as a platform error`() {
-
             let error = Kernel.Copy.Error(posixErrno: 999)
             #expect(error == .platform(code: .posix(999)))
         }

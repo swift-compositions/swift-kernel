@@ -20,7 +20,6 @@ extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     func `platformUnsupported case exists`() {
         let reason = Kernel.File.Direct.Requirements.Reason.platformUnsupported
         if case .platformUnsupported = reason {
-
         } else {
             Issue.record("Expected .platformUnsupported case")
         }
@@ -30,7 +29,6 @@ extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     func `sectorSizeUndetermined case exists`() {
         let reason = Kernel.File.Direct.Requirements.Reason.sectorSizeUndetermined
         if case .sectorSizeUndetermined = reason {
-
         } else {
             Issue.record("Expected .sectorSizeUndetermined case")
         }
@@ -40,7 +38,6 @@ extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     func `filesystemUnsupported case exists`() {
         let reason = Kernel.File.Direct.Requirements.Reason.filesystemUnsupported
         if case .filesystemUnsupported = reason {
-
         } else {
             Issue.record("Expected .filesystemUnsupported case")
         }
@@ -50,7 +47,6 @@ extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.Unit {
     func `invalidHandle case exists`() {
         let reason = Kernel.File.Direct.Requirements.Reason.invalidHandle
         if case .invalidHandle = reason {
-
         } else {
             Issue.record("Expected .invalidHandle case")
         }
@@ -117,7 +113,7 @@ extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.EdgeCase {
             .invalidHandle,
         ]
 
-        for i in 0..<reasons.count {
+        (0..<reasons.count).forEach { i in
             for j in (i + 1)..<reasons.count {
                 #expect(reasons[i] != reasons[j])
             }

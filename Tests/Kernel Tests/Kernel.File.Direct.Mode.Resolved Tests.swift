@@ -20,7 +20,6 @@ extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.Unit {
     func `direct case exists`() {
         let resolved = Kernel.File.Direct.Mode.Resolved.direct
         if case .direct = resolved {
-
         } else {
             Issue.record("Expected .direct case")
         }
@@ -30,7 +29,6 @@ extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.Unit {
     func `uncached case exists`() {
         let resolved = Kernel.File.Direct.Mode.Resolved.uncached
         if case .uncached = resolved {
-
         } else {
             Issue.record("Expected .uncached case")
         }
@@ -40,7 +38,6 @@ extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.Unit {
     func `buffered case exists`() {
         let resolved = Kernel.File.Direct.Mode.Resolved.buffered
         if case .buffered = resolved {
-
         } else {
             Issue.record("Expected .buffered case")
         }
@@ -73,7 +70,7 @@ extension `Kernel.File.Direct.Mode.Resolved Tests`.Test.EdgeCase {
             .buffered,
         ]
 
-        for i in 0..<cases.count {
+        (0..<cases.count).forEach { i in
             for j in (i + 1)..<cases.count {
                 #expect(cases[i] != cases[j])
             }

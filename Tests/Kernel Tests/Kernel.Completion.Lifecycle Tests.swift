@@ -496,7 +496,7 @@ extension `Kernel.Completion.Lifecycle Tests` {
 
         @Test
         func `consecutive negative values are all failures`() {
-            for raw in Int32(-100)...Int32(-1) {
+            (Int32(-100)...Int32(-1)).forEach { raw in
                 let result = Kernel.Completion.Event.Result(rawValue: raw)
                 let isSuccess = result.isSuccess
                 #expect(!isSuccess, "rawValue \(raw) should be failure")
@@ -585,7 +585,6 @@ extension `Kernel.Completion.Lifecycle Tests` {
             #expect(!hasNotification)
             completion.close()
         }
-
     }
 
 #endif

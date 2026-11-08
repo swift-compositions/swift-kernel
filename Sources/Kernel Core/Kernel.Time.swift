@@ -21,7 +21,7 @@ extension Time.Instant {
     package var nanoseconds: Int32 { nanosecondFraction }
 
     @inlinable
-    package var totalNanoseconds: Int64 {
+    var totalNanoseconds: Int64 {
         secondsSinceUnixEpoch * 1_000_000_000 + Int64(nanosecondFraction)
     }
 

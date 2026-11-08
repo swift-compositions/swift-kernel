@@ -8,7 +8,7 @@
 
     @testable @_spi(Syscall) import Kernel
 
-    @Suite("Kernel.Event.ID Tests")
+    @Suite
     struct EventIDTests {
 
         @Test

@@ -16,11 +16,12 @@ extension Kernel.File.Copy {
         }
 
         let sourceIsSymlink: Bool
-        sourceIsSymlink = if case .link(.symbolic) = sourceStats.type {
-            true
-        } else {
-            false
-        }
+        sourceIsSymlink =
+            if case .link(.symbolic) = sourceStats.type {
+                true
+            } else {
+                false
+            }
 
         try handleDestination(destination, overwrite: options.overwrite)
 

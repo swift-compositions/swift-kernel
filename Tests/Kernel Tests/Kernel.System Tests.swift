@@ -3,7 +3,7 @@ import Testing
 
 @testable import Kernel
 
-fileprivate enum SystemMemoryTests {
+private enum SystemMemoryTests {
     @Suite struct Test {
         @Suite struct Unit {}
     }
@@ -29,7 +29,7 @@ fileprivate enum SystemMemoryTests {
 
 #endif
 
-fileprivate enum SystemProcessorTests {
+private enum SystemProcessorTests {
     @Suite struct Test {
         @Suite struct Unit {}
     }
@@ -57,7 +57,7 @@ extension SystemProcessorTests.Test.Unit {
     }
 }
 
-fileprivate enum SystemNameTests {
+private enum SystemNameTests {
     @Suite struct Test {
         @Suite struct Unit {}
     }

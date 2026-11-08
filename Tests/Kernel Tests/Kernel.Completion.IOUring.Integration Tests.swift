@@ -4,9 +4,9 @@
     import Kernel_Test_Support
     @_spi(Syscall) @testable import Kernel
 
-enum `Kernel.Completion.IOUring.Integration Tests` {}
+    enum `Kernel.Completion.IOUring.Integration Tests` {}
 
-extension `Kernel.Completion.IOUring.Integration Tests` {
+    extension `Kernel.Completion.IOUring.Integration Tests` {
         @Suite(.serialized, .enabled(if: Kernel.IO.Uring.isSupported))
         struct `IOUring Integration Tests` {
 
@@ -117,6 +117,6 @@ extension `Kernel.Completion.IOUring.Integration Tests` {
 
             }
         }
-}
+    }
 
 #endif

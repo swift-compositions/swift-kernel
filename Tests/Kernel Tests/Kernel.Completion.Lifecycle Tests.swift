@@ -5,13 +5,13 @@
 
     @_spi(Syscall) @testable import Kernel_Completion
 
-enum `Kernel.Completion.Lifecycle Tests` {}
+    enum `Kernel.Completion.Lifecycle Tests` {}
 
-extension `Kernel.Completion.Lifecycle Tests` {
+    extension `Kernel.Completion.Lifecycle Tests` {
         @Suite
         struct `Completion Lifecycle Tests` {
         }
-}
+    }
 
     extension `Kernel.Completion.Lifecycle Tests`.`Completion Lifecycle Tests` {
         @Suite struct `Full Lifecycle` {}

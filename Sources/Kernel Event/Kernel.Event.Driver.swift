@@ -140,7 +140,7 @@
                     guard rawCount > 0 else { return 0 }
 
                     var write = 0
-                    for read in 0..<rawCount {
+                    (0..<rawCount).forEach { read in
                         if shared.registry.contains(key: buffer[read].id) {
                             if write != read { buffer[write] = buffer[read] }
                             write += 1

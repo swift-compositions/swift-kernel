@@ -152,7 +152,7 @@ extension `Kernel.Copy.Error Tests`.Test.EdgeCase {
         ]
 
         (0..<cases.count).forEach { i in
-            for j in (i + 1)..<cases.count {
+            ((i + 1)..<cases.count).forEach { j in
                 #expect(cases[i] != cases[j])
             }
         }

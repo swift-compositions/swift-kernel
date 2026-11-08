@@ -114,7 +114,7 @@ extension `Kernel.File.Direct.Requirements.Reason Tests`.Test.EdgeCase {
         ]
 
         (0..<reasons.count).forEach { i in
-            for j in (i + 1)..<reasons.count {
+            ((i + 1)..<reasons.count).forEach { j in
                 #expect(reasons[i] != reasons[j])
             }
         }

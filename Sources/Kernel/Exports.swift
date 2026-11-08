@@ -52,7 +52,7 @@ public import Kernel_Thread
 #endif
 
 #if canImport(Darwin) || canImport(Glibc) || canImport(Musl)
-    public import POSIX_Kernel_Lock
+    import POSIX_Kernel_Lock
 #elseif os(Windows)
-    public import Windows_Kernel_Lock
+    import Windows_Kernel_Lock
 #endif

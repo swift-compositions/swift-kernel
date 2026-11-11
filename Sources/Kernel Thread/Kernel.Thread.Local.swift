@@ -10,7 +10,7 @@ extension Kernel.Thread {
             #if canImport(Darwin) || canImport(Glibc) || canImport(Musl)
                 _slot = try unsafe _PlatformSlot(destructor: _kernelThreadLocalRelease)
             #elseif os(Windows)
-                _slot = _PlatformSlot()
+                _slot = try _PlatformSlot()
             #endif
         }
 
